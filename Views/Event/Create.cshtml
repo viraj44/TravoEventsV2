@@ -1,0 +1,1085 @@
+﻿  <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-yellow: #ffd700;
+            --dark-yellow: #e6a200;
+            --light-yellow: #fff9e6;
+            --accent-yellow: #ffefb3;
+            --text-dark: #664d00;
+            --text-medium: #8a6d00;
+            --text-light: #b38f00;
+            --border-yellow: #ffe680;
+            --white: #ffffff;
+            --shadow: rgba(255, 183, 0, 0.15);
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --gray: #64748b;
+        }
+
+        body {
+            background-color: var(--light-yellow);
+            color: var(--text-dark);
+            line-height: 1.5;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 12px;
+        }
+
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 5px var(--shadow);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid var(--border-yellow);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 16px;
+        }
+
+        .logo-text {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-medium);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .page-header {
+            margin-bottom: 15px;
+        }
+
+        .page-header h1 {
+            font-size: 20px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            color: var(--text-medium);
+            font-size: 13px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px var(--shadow);
+            border: 1px solid var(--border-yellow);
+            margin-bottom: 12px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-yellow);
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            font-size: 15px;
+            color: var(--text-dark);
+            transition: all 0.15s ease;
+            -webkit-appearance: none;
+            background: var(--white);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--dark-yellow);
+            box-shadow: 0 0 0 2px rgba(230, 162, 0, 0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-label {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-yellow);
+        }
+
+        .btn {
+            background: var(--white);
+            color: var(--text-dark);
+            border: 1px solid var(--primary-yellow);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-weight: 500;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: var(--light-yellow);
+            border-color: var(--dark-yellow);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+            color: var(--white);
+            border: none;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-secondary {
+            background: var(--primary-yellow);
+            color: var(--text-dark);
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-yellow);
+            color: var(--white);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+
+        .btn-danger {
+            background: var(--white);
+            color: var(--danger);
+            border: 1px solid #fecaca;
+        }
+
+        .btn-danger:hover {
+            background: #fef2f2;
+        }
+
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 13px;
+            width: auto;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .action-buttons .btn {
+            flex: 1;
+        }
+
+        .access-points {
+            margin-top: 15px;
+        }
+
+        .access-point-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: var(--light-yellow);
+        }
+
+        .access-point-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .access-point-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-yellow) 0%, var(--dark-yellow) 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 14px;
+        }
+
+        .access-point-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .access-point-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .alert {
+            padding: 10px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            display: none;
+            animation: slideDown 0.3s ease;
+            border: 1px solid;
+            font-size: 13px;
+        }
+
+        .alert.success {
+            background: var(--light-yellow);
+            color: var(--text-dark);
+            border-color: var(--primary-yellow);
+        }
+
+        .alert.error {
+            background: #fff5e6;
+            color: #cc5500;
+            border-color: #ffcc99;
+        }
+
+        .alert.warning {
+            background: #fffbeb;
+            color: #92400e;
+            border-color: #fed7aa;
+        }
+
+        .alert.active {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @@keyframes slideDown {
+            from {
+                transform: translateY(-8px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Participant Management Styles */
+        .participant-section {
+            margin-top: 15px;
+        }
+
+        .participant-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .participant-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .participant-option:hover {
+            background: var(--light-yellow);
+        }
+
+        .participant-option.selected {
+            background: var(--accent-yellow);
+            border-color: var(--primary-yellow);
+        }
+
+        .option-radio {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary-yellow);
+        }
+
+        .option-content {
+            flex: 1;
+        }
+
+        .option-title {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+
+        .option-description {
+            font-size: 13px;
+            color: var(--text-medium);
+        }
+
+        .participant-details {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            background: var(--light-yellow);
+        }
+
+        .participant-details.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .participant-list {
+            margin-top: 15px;
+        }
+
+        .participant-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            margin-bottom: 8px;
+            background: var(--white);
+        }
+
+        .participant-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .participant-avatar {
+            width: 32px;
+            height: 32px;
+            background: var(--primary-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .participant-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .participant-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .qr-preview {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            background: var(--white);
+            margin-top: 15px;
+        }
+
+        .qr-code {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 10px;
+            background: var(--light-yellow);
+            border: 1px solid var(--border-yellow);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: var(--text-medium);
+        }
+
+        .qr-label {
+            font-size: 13px;
+            color: var(--text-medium);
+            font-weight: 600;
+        }
+
+        /* Mobile-specific improvements */
+        @@media (max-width: 480px) {
+            .container {
+                padding: 8px;
+            }
+
+            header {
+                padding: 10px 12px;
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .logo {
+                justify-content: center;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 8px;
+                align-items: flex-start;
+            }
+
+            .card-header .btn-sm {
+                align-self: stretch;
+            }
+
+            .participant-option {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @@media (min-width: 768px) {
+            .container {
+                max-width: 800px;
+                padding: 15px;
+            }
+
+            .btn {
+                width: auto;
+            }
+
+            .action-buttons .btn {
+                flex: none;
+            }
+        }
+
+        /* Improve touch targets */
+        .btn, .action-btn {
+            min-height: 40px;
+        }
+
+        /* Prevent zoom on input focus for iOS */
+        @@media (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
+    </style>
+ 
+
+        <div class="page-header">
+            <h1>Create Non-RSVP Event</h1>
+            <p>Set up an event that doesn't require attendee registration</p>
+        </div>
+
+        <div id="alertBox" class="alert"></div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Event Details</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="eventName">Event Name</label>
+                <input type="text" class="form-input" id="eventName" placeholder="Enter event name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="eventDescription">Event Description</label>
+                <textarea class="form-textarea" id="eventDescription" placeholder="Describe your event"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="eventDate">Start Date</label>
+                    <input type="date" class="form-input" id="eventDate">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="eventTime">Event Time</label>
+                    <input type="time" class="form-input" id="eventTime">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="eventEndDate">End Date</label>
+                    <input type="date" class="form-input" id="eventEndDate">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="eventEndTime">Event Time</label>
+                    <input type="time" class="form-input" id="eventEndTime">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label" for="eventLocation">Event Location</label>
+                    <input type="text" class="form-input" id="eventLocation" placeholder="Where is the event?">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="eventCapacity">Estimated Capacity</label>
+                    <input type="number" class="form-input" id="eventCapacity" placeholder="0" min="0">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="eventCategory">Event Category</label>
+                <select class="form-select" id="eventCategory">
+                    <option value="">Select Category</option>
+                    <option value="conference">Conference</option>
+                    <option value="workshop">Workshop</option>
+                    <option value="seminar">Seminar</option>
+                    <option value="networking">Networking</option>
+                    <option value="exhibition">Exhibition</option>
+                    <option value="social">Social Event</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Participant Management Section -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Participant Management</div>
+            </div>
+
+            <div class="participant-options">
+                <div class="participant-option" data-option="none" style="display:none;">
+                    <input type="radio" class="option-radio" name="participantOption" id="optionNone" checked>
+                    <div class="option-content">
+                        <div class="option-title">No Pre-registered Participants</div>
+                        <div class="option-description">Allow anyone to attend without registration. No QR codes needed.</div>
+                    </div>
+                </div>
+
+                <div class="participant-option" data-option="common">
+                    <input type="radio" class="option-radio" name="participantOption" id="optionCommon">
+                    <div class="option-content">
+                        <div class="option-title">Common QR Code for All Participants</div>
+                        <div class="option-description">Generate a single QR code that can be used by all attendees.</div>
+                    </div>
+                </div>
+
+                <div class="participant-option" data-option="individual">
+                    <input type="radio" class="option-radio" name="participantOption" id="optionIndividual">
+                    <div class="option-content">
+                        <div class="option-title">Individual QR Codes</div>
+                        <div class="option-description">Generate unique QR codes for each participant for better tracking.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common QR Code Details -->
+            <div class="participant-details" id="commonQrDetails">
+                <div class="form-group">
+                    <label class="form-label" for="commonQrName">QR Code Name</label>
+                    <input type="text" class="form-input" id="commonQrName" placeholder="e.g., General Admission">
+                </div>
+                
+                <div class="qr-preview">
+                    <div class="qr-code">
+                        <i class="fas fa-qrcode" style="font-size: 48px; color: var(--text-medium);"></i>
+                    </div>
+                    <div class="qr-label">Common QR Code Preview</div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" id="limitCommonUsage">
+                    <label class="checkbox-label" for="limitCommonUsage">Limit number of scans for this QR code</label>
+                </div>
+                
+                <div class="form-group" id="commonUsageLimitGroup" style="display: none;">
+                    <label class="form-label" for="commonUsageLimit">Maximum Scans</label>
+                    <input type="number" class="form-input" id="commonUsageLimit" placeholder="0" min="0">
+                </div>
+            </div>
+
+            <!-- Individual QR Codes Details -->
+            <div class="participant-details" id="individualQrDetails">
+                <div class="form-group">
+                    <label class="form-label">Add Participants</label>
+                    <div class="form-row">
+                        <input type="text" class="form-input" id="participantName" placeholder="Participant name">
+                        <input type="email" class="form-input" id="participantEmail" placeholder="Email (optional)">
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="addParticipantBtn" style="margin-top: 8px;">
+                        <i class="fas fa-plus"></i> Add Participant
+                    </button>
+                </div>
+
+                <div class="participant-list" id="participantList">
+                    <!-- Participants will be added here -->
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox" id="sendIndividualQr" checked>
+                    <label class="checkbox-label" for="sendIndividualQr">Send QR codes to participants via email</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Additional Settings</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="eventCoordinator">Event Coordinator</label>
+                <input type="text" class="form-input" id="eventCoordinator" value="John Doe" readonly>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label" for="eventCode">Event Code (Optional)</label>
+                <input type="text" class="form-input" id="eventCode" placeholder="Generate or enter event code">
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" class="checkbox" id="trackAttendance" checked>
+                <label class="checkbox-label" for="trackAttendance">Track attendance statistics</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" class="checkbox" id="sendNotifications">
+                <label class="checkbox-label" for="sendNotifications">Send event notifications</label>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-secondary" id="saveDraftBtn">
+                <i class="fas fa-save"></i> Save as Draft
+            </button>
+            <button class="btn btn-primary" id="createEventBtn">
+                <i class="fas fa-calendar-check"></i> Create Event
+            </button>
+        </div>
+     
+    <script>
+        // Sample access points
+        const defaultAccessPoints = [
+            { id: 'main-entrance', name: 'Main Entrance', icon: 'door-open' },
+            { id: 'vip-lounge', name: 'VIP Lounge', icon: 'crown' },
+            { id: 'exhibition-hall', name: 'Exhibition Hall', icon: 'images' },
+            { id: 'conference-room-a', name: 'Conference Room A', icon: 'users' },
+            { id: 'conference-room-b', name: 'Conference Room B', icon: 'users' },
+            { id: 'networking-area', name: 'Networking Area', icon: 'comments' },
+            { id: 'dining-area', name: 'Dining Area', icon: 'utensils' },
+            { id: 'parking', name: 'Parking Area', icon: 'parking' }
+        ];
+
+        let selectedAccessPoints = [];
+        let eventDrafts = [];
+        let participants = [];
+
+        // Initialize the page
+        function initializePage() {
+            setupEventListeners();
+
+            // Load any existing drafts from localStorage
+            const savedDrafts = localStorage.getItem('eventDrafts');
+            if (savedDrafts) {
+                eventDrafts = JSON.parse(savedDrafts);
+            }
+
+            // Set minimum date to today
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('eventDate').min = today;
+            document.getElementById('eventEndDate').min = today;
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            document.getElementById('createEventBtn').addEventListener('click', createEvent);
+            document.getElementById('saveDraftBtn').addEventListener('click', saveDraft);
+            document.getElementById('addParticipantBtn').addEventListener('click', addParticipant);
+            
+            // Participant option selection
+            document.querySelectorAll('.participant-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const radio = this.querySelector('.option-radio');
+                    radio.checked = true;
+                    updateParticipantOptions();
+                });
+            });
+            
+            // Limit common usage checkbox
+            document.getElementById('limitCommonUsage').addEventListener('change', function() {
+                document.getElementById('commonUsageLimitGroup').style.display = this.checked ? 'block' : 'none';
+            });
+        }
+
+        // Update participant options UI
+        function updateParticipantOptions() {
+            // Remove selected class from all options
+            document.querySelectorAll('.participant-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Add selected class to current option
+            const selectedOption = document.querySelector('.option-radio:checked').closest('.participant-option');
+            selectedOption.classList.add('selected');
+            
+            // Show/hide details based on selection
+            const optionValue = selectedOption.dataset.option;
+            
+            document.getElementById('commonQrDetails').classList.remove('active');
+            document.getElementById('individualQrDetails').classList.remove('active');
+            
+            if (optionValue === 'common') {
+                document.getElementById('commonQrDetails').classList.add('active');
+            } else if (optionValue === 'individual') {
+                document.getElementById('individualQrDetails').classList.add('active');
+            }
+        }
+
+        // Add participant to the list
+        function addParticipant() {
+            const name = document.getElementById('participantName').value;
+            const email = document.getElementById('participantEmail').value;
+            
+            if (!name) {
+                showAlert('Please enter a participant name', 'error');
+                return;
+            }
+            
+            const participant = {
+                id: generateId(),
+                name: name,
+                email: email,
+                qrCode: generateQRCode()
+            };
+            
+            participants.push(participant);
+            updateParticipantList();
+            
+            // Clear input fields
+            document.getElementById('participantName').value = '';
+            document.getElementById('participantEmail').value = '';
+            
+            showAlert(`Participant "${name}" added successfully`, 'success');
+        }
+
+        // Remove participant from the list
+        function removeParticipant(id) {
+            participants = participants.filter(p => p.id !== id);
+            updateParticipantList();
+        }
+
+        // Update the participant list UI
+        function updateParticipantList() {
+            const participantList = document.getElementById('participantList');
+            participantList.innerHTML = '';
+            
+            if (participants.length === 0) {
+                participantList.innerHTML = '<div style="text-align: center; padding: 15px; color: var(--text-medium);">No participants added yet</div>';
+                return;
+            }
+            
+            participants.forEach(participant => {
+                const participantElement = document.createElement('div');
+                participantElement.className = 'participant-item';
+                participantElement.innerHTML = `
+                    <div class="participant-info">
+                        <div class="participant-avatar">${participant.name.charAt(0).toUpperCase()}</div>
+                        <div>
+                            <div class="participant-name">${participant.name}</div>
+                            <div style="font-size: 12px; color: var(--text-medium);">${participant.email || 'No email provided'}</div>
+                        </div>
+                    </div>
+                    <div class="participant-actions">
+                        <button class="btn btn-sm btn-danger" onclick="removeParticipant('${participant.id}')">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                `;
+                participantList.appendChild(participantElement);
+            });
+        }
+
+        // Create event
+        function createEvent() {
+            const eventName = document.getElementById('eventName').value;
+            const eventDate = document.getElementById('eventDate').value;
+            const eventTime = document.getElementById('eventTime').value;
+            const participantOption = document.querySelector('.option-radio:checked').closest('.participant-option').dataset.option;
+
+            if (!eventName) {
+                showAlert('Please enter an event name', 'error');
+                return;
+            }
+
+            if (!eventDate) {
+                showAlert('Please select an event date', 'error');
+                return;
+            }
+
+            if (!eventTime) {
+                showAlert('Please select an event time', 'error');
+                return;
+            }
+
+            // Validate participant options
+            if (participantOption === 'individual' && participants.length === 0) {
+                showAlert('Please add at least one participant for individual QR codes', 'error');
+                return;
+            }
+
+            // Create event object
+            const event = {
+                id: generateEventId(),
+                name: eventName,
+                description: document.getElementById('eventDescription').value,
+                date: eventDate,
+                time: eventTime,
+                endDate: document.getElementById('eventEndDate').value,
+                endTime: document.getElementById('eventEndTime').value,
+                location: document.getElementById('eventLocation').value,
+                capacity: document.getElementById('eventCapacity').value,
+                category: document.getElementById('eventCategory').value,
+                coordinator: document.getElementById('eventCoordinator').value,
+                code: document.getElementById('eventCode').value || generateEventCode(),
+                participantOption: participantOption,
+                participants: participants,
+                commonQrName: document.getElementById('commonQrName').value,
+                limitCommonUsage: document.getElementById('limitCommonUsage').checked,
+                commonUsageLimit: document.getElementById('commonUsageLimit').value,
+                sendIndividualQr: document.getElementById('sendIndividualQr').checked,
+                trackAttendance: document.getElementById('trackAttendance').checked,
+                sendNotifications: document.getElementById('sendNotifications').checked,
+                created: new Date().toISOString(),
+                type: 'non-rsvp'
+            };
+
+            // Save event to localStorage
+            const savedEvents = localStorage.getItem('events');
+            const events = savedEvents ? JSON.parse(savedEvents) : [];
+            events.push(event);
+            localStorage.setItem('events', JSON.stringify(events));
+
+            showAlert('Event created successfully!', 'success');
+
+            // Reset form
+            resetForm();
+
+            // Redirect to event management page (simulated)
+            setTimeout(() => {
+                alert('Redirecting to event management page...');
+                // In a real app, you would redirect to the event management page
+                // window.location.href = 'event-management.html';
+            }, 1500);
+        }
+
+        // Save as draft
+        function saveDraft() {
+            const eventName = document.getElementById('eventName').value;
+
+            if (!eventName) {
+                showAlert('Please enter an event name to save as draft', 'error');
+                return;
+            }
+
+            const participantOption = document.querySelector('.option-radio:checked').closest('.participant-option').dataset.option;
+
+            // Create draft object
+            const draft = {
+                id: generateEventId(),
+                name: eventName,
+                description: document.getElementById('eventDescription').value,
+                date: document.getElementById('eventDate').value,
+                time: document.getElementById('eventTime').value,
+                endDate: document.getElementById('eventEndDate').value,
+                endTime: document.getElementById('eventEndTime').value,
+                location: document.getElementById('eventLocation').value,
+                capacity: document.getElementById('eventCapacity').value,
+                category: document.getElementById('eventCategory').value,
+                coordinator: document.getElementById('eventCoordinator').value,
+                code: document.getElementById('eventCode').value,
+                participantOption: participantOption,
+                participants: participants,
+                commonQrName: document.getElementById('commonQrName').value,
+                limitCommonUsage: document.getElementById('limitCommonUsage').checked,
+                commonUsageLimit: document.getElementById('commonUsageLimit').value,
+                sendIndividualQr: document.getElementById('sendIndividualQr').checked,
+                trackAttendance: document.getElementById('trackAttendance').checked,
+                sendNotifications: document.getElementById('sendNotifications').checked,
+                saved: new Date().toISOString(),
+                type: 'non-rsvp'
+            };
+
+            // Save draft to localStorage
+            eventDrafts.push(draft);
+            localStorage.setItem('eventDrafts', JSON.stringify(eventDrafts));
+
+            showAlert('Event saved as draft', 'success');
+        }
+
+        // Generate unique event ID
+        function generateEventId() {
+            return 'event-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9);
+        }
+
+        // Generate participant ID
+        function generateId() {
+            return 'p-' + Date.now() + '-' + Math.random().toString(36).substr(2, 5);
+        }
+
+        // Generate event code
+        function generateEventCode() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        // Generate QR code (simulated)
+        function generateQRCode() {
+            return 'QR-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        // Reset form
+        function resetForm() {
+            document.getElementById('eventName').value = '';
+            document.getElementById('eventDescription').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventTime').value = '';
+            document.getElementById('eventEndDate').value = '';
+            document.getElementById('eventEndTime').value = '';
+            document.getElementById('eventLocation').value = '';
+            document.getElementById('eventCapacity').value = '';
+            document.getElementById('eventCategory').value = '';
+            document.getElementById('eventCode').value = '';
+            document.getElementById('commonQrName').value = '';
+            document.getElementById('limitCommonUsage').checked = false;
+            document.getElementById('commonUsageLimit').value = '';
+            document.getElementById('commonUsageLimitGroup').style.display = 'none';
+            document.getElementById('sendIndividualQr').checked = true;
+            document.getElementById('trackAttendance').checked = true;
+            document.getElementById('sendNotifications').checked = false;
+            
+            // Reset participant options
+            document.getElementById('optionNone').checked = true;
+            updateParticipantOptions();
+            
+            // Clear participants
+            participants = [];
+            updateParticipantList();
+        }
+
+        // Show alert
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert ${type} active`;
+            setTimeout(() => {
+                alertBox.classList.remove('active');
+            }, 3000);
+        }
+
+        // Initialize the page when loaded
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+ 

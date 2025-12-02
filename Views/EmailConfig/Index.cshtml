@@ -1,0 +1,1187 @@
+﻿<style>
+    :root {
+        /* --primary: #ffc107 : #ffc107;
+        --primary-dark: #e6ac00;
+        --primary-light: #fff3cd;
+        --secondary: #ff6b35;
+        --dark: #2a2a3c;
+        --light: #fefefe;
+        --gray: #6c757d;
+            --success: #28a745;*/
+
+
+         --primary: #4361ee;
+        --primary-light: #eef2ff;
+        --primary-dark: #3a56d4;
+        --secondary: #06d6a0;  
+        --danger: #ef4444;
+        --warning: #f59e0b;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --gray: #6c757d; 
+        --border: #dee2e6;
+        --radius: 8px;
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    body {
+        background-color: #f5f7fb;
+        color: var(--dark);
+        line-height: 1.5;
+        font-size: 14px;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        background: white;
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        padding: 20px;
+        margin-bottom: 24px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: var(--radius);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+    }
+
+    .logo-text {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        color: var(--gray);
+    }
+
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        background: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .content-area {
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 24px;
+    }
+
+    .page-header {
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border);
+    }
+
+        .page-header h1 {
+            font-size: 26px;
+            color: var(--dark);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .page-header p {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+    .btn {
+        background: white;
+        color: var(--dark);
+        border: 1px solid var(--border);
+        padding: 10px 16px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+    }
+
+        .btn:hover {
+            background: #f8f9fa;
+            border-color: var(--gray);
+        }
+
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+    .btn-success {
+        background: var(--secondary);
+        color: white;
+        border: none;
+    }
+
+        .btn-success:hover {
+            background: #05c290;
+        }
+
+    .btn-danger {
+        background: var(--danger);
+        color: white;
+        border: none;
+    }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+    .card {
+        background: white;
+        border-radius: var(--radius);
+        padding: 20px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--dark);
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        font-size: 14px;
+        color: var(--dark);
+        transition: all 0.15s ease;
+    }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+        }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .form-hint {
+        font-size: 13px;
+        color: var(--gray);
+        margin-top: 6px;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 24px;
+    }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 24px;
+    }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+    input:checked + .toggle-slider {
+        background-color: var(--primary);
+    }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+    .toggle-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .toggle-label {
+        font-weight: 600;
+        color: var(--dark);
+    }
+
+    .alert {
+        padding: 14px 18px;
+        border-radius: var(--radius);
+        margin-bottom: 20px;
+        display: none;
+        animation: slideDown 0.2s ease;
+        border: 1px solid;
+        font-size: 14px;
+    }
+
+        .alert.success {
+            background: #f0fdf4;
+            color: #166534;
+            border-color: #bbf7d0;
+        }
+
+        .alert.error {
+            background: #fef2f2;
+            color: #991b1b;
+            border-color: #fecaca;
+        }
+
+        .alert.warning {
+            background: #fffbeb;
+            color: #92400e;
+            border-color: #fed7aa;
+        }
+
+        .alert.active {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+    @@keyframes slideDown {
+        from
+
+    {
+        transform: translateY(-10px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    }
+
+    .tab-container {
+        margin-bottom: 20px;
+    }
+
+    .tabs {
+        display: flex;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 20px;
+    }
+
+    .tab {
+        padding: 12px 20px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--gray);
+        border-bottom: 2px solid transparent;
+        transition: all 0.15s ease;
+    }
+
+        .tab:hover {
+            color: var(--primary);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+        }
+
+    .tab-content {
+        display: none;
+    }
+
+        .tab-content.active {
+            display: block;
+        }
+
+    .template-preview {
+        background: var(--light);
+        border-radius: var(--radius);
+        padding: 20px;
+        border: 1px solid var(--border);
+        margin-top: 20px;
+    }
+
+    .template-preview-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .template-preview-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .template-content {
+        background: white;
+        border-radius: var(--radius);
+        padding: 20px;
+        border: 1px solid var(--border);
+        min-height: 200px;
+    }
+
+    .test-email-section {
+        background: var(--light);
+        border-radius: var(--radius);
+        padding: 20px;
+        border: 1px solid var(--border);
+        margin-top: 20px;
+    }
+
+    .test-email-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .test-email-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .status-connected {
+        background: #f0fdf4;
+        color: #166534;
+        border: 1px solid #bbf7d0;
+    }
+
+    .status-disconnected {
+        background: #fef2f2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+    .status-testing {
+        background: #fffbeb;
+        color: #92400e;
+        border: 1px solid #fed7aa;
+    }
+
+    .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+    }
+
+    .status-connected .status-dot {
+        background: #16a34a;
+    }
+
+    .status-disconnected .status-dot {
+        background: #dc2626;
+    }
+
+    .status-testing .status-dot {
+        background: #d97706;
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    .template-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .template-item {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 15px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+    }
+
+        .template-item:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .template-item.active {
+            border-color: var(--primary);
+            background: var(--primary-light);
+        }
+
+    .template-item-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .template-item-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .template-item-desc {
+        font-size: 13px;
+        color: var(--gray);
+        line-height: 1.5;
+    }
+
+    @@media (max-width: 768px) {
+        .form-row
+
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .template-list {
+        grid-template-columns: 1fr;
+    }
+
+    }
+</style>
+
+  
+    <div class="alert" id="alertBox"></div>
+
+    <div class="page-header">
+        <h1>Email Configuration</h1>
+        <p>Configure email settings, templates, and test your email service</p>
+    </div>
+
+    <div class="tab-container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('smtp')">SMTP Settings</div>
+            <div class="tab" onclick="switchTab('templates')">Email Templates</div>
+            <div class="tab" onclick="switchTab('test')">Test Email</div>
+        </div>
+
+        <!-- SMTP Settings Tab -->
+        <div id="smtp-tab" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">SMTP Server Configuration</div>
+                    <div class="status-indicator" id="smtpStatus">
+                        <span class="status-dot"></span>
+                        <span>Disconnected</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="toggle-container">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="enableSmtp" onchange="toggleSmtpSettings()">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span class="toggle-label">Enable SMTP</span>
+                    </div>
+                </div>
+
+                <div id="smtpSettings">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="smtpHost">SMTP Host</label>
+                            <input type="text" class="form-input" id="smtpHost" placeholder="smtp.example.com">
+                            <div class="form-hint">Your SMTP server address</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="smtpPort">SMTP Port</label>
+                            <input type="number" class="form-input" id="smtpPort" placeholder="587" value="587">
+                            <div class="form-hint">Usually 587 for TLS or 465 for SSL</div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="smtpUsername">Username</label>
+                            <input type="text" class="form-input" id="smtpUsername" placeholder="your-email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="smtpPassword">Password</label>
+                            <input type="password" class="form-input" id="smtpPassword" placeholder="Your SMTP password">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="fromName">From Name</label>
+                            <input type="text" class="form-input" id="fromName" placeholder="Your Company Name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="fromEmail">From Email</label>
+                            <input type="email" class="form-input" id="fromEmail" placeholder="noreply@example.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="toggle-container">
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="enableTls" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                            <span class="toggle-label">Enable TLS/SSL Encryption</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="testSmtpConnection()">
+                            <span>🔗</span> Test Connection
+                        </button>
+                        <button class="btn btn-success" onclick="saveSmtpSettings()">
+                            <span>💾</span> Save Settings
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Email Templates Tab -->
+        <div id="templates-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Email Templates</div>
+                    <button class="btn btn-primary" onclick="createNewTemplate()">
+                        <span>➕</span> New Template
+                    </button>
+                </div>
+
+                <div class="template-list">
+                    <div class="template-item active" onclick="selectTemplate('welcome')">
+                        <div class="template-item-header">
+                            <div class="template-item-title">Welcome Email</div>
+                            <span>✅</span>
+                        </div>
+                        <div class="template-item-desc">
+                            Sent to new users when they register for the first time.
+                        </div>
+                    </div>
+                    <div class="template-item" onclick="selectTemplate('notification')">
+                        <div class="template-item-header">
+                            <div class="template-item-title">Notification Email</div>
+                            <span>✅</span>
+                        </div>
+                        <div class="template-item-desc">
+                            General notifications and announcements for users.
+                        </div>
+                    </div>
+                    <div class="template-item" onclick="selectTemplate('password')">
+                        <div class="template-item-header">
+                            <div class="template-item-title">Password Reset</div>
+                            <span>✅</span>
+                        </div>
+                        <div class="template-item-desc">
+                            Sent when users request to reset their password.
+                        </div>
+                    </div>
+                    <div class="template-item" onclick="selectTemplate('group')">
+                        <div class="template-item-header">
+                            <div class="template-item-title">Group Assignment</div>
+                            <span>✅</span>
+                        </div>
+                        <div class="template-item-desc">
+                            Notifies users when they are assigned to a group.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="templateSubject">Email Subject</label>
+                    <input type="text" class="form-input" id="templateSubject" placeholder="Enter email subject">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="templateContent">Email Content</label>
+                    <textarea class="form-textarea" id="templateContent" placeholder="Enter your email content here..."></textarea>
+                    <div class="form-hint">
+                        You can use variables like: {name}, {email}, {group}, {date}
+                    </div>
+                </div>
+
+                <div class="template-preview">
+                    <div class="template-preview-header">
+                        <div class="template-preview-title">Preview</div>
+                        <button class="btn" onclick="refreshPreview()">
+                            <span>🔄</span> Refresh
+                        </button>
+                    </div>
+                    <div class="template-content" id="templatePreview">
+                        Preview will appear here...
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="saveTemplate()">
+                        <span>💾</span> Save Template
+                    </button>
+                    <button class="btn" onclick="resetTemplate()">
+                        <span>↩️</span> Reset to Default
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Email Tab -->
+        <div id="test-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Test Email Configuration</div>
+                    <div class="status-indicator status-testing" id="testStatus" style="display: none;">
+                        <span class="status-dot"></span>
+                        <span>Sending Test Email...</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="testRecipient">Recipient Email</label>
+                    <input type="email" class="form-input" id="testRecipient" placeholder="test@example.com">
+                    <div class="form-hint">Enter the email address where you want to send the test message</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="testTemplate">Select Template</label>
+                    <select class="form-select" id="testTemplate">
+                        <option value="welcome">Welcome Email</option>
+                        <option value="notification">Notification Email</option>
+                        <option value="password">Password Reset</option>
+                        <option value="group">Group Assignment</option>
+                    </select>
+                </div>
+
+                <div class="test-email-section">
+                    <div class="test-email-header">
+                        <div class="test-email-title">Test Email Preview</div>
+                        <button class="btn" onclick="updateTestPreview()">
+                            <span>🔄</span> Update Preview
+                        </button>
+                    </div>
+                    <div class="template-content" id="testPreview">
+                        Test email preview will appear here...
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="sendTestEmail()">
+                        <span>📧</span> Send Test Email
+                    </button>
+                    <button class="btn" onclick="clearTestForm()">
+                        <span>🗑️</span> Clear Form
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+<script type="text/javascript">
+        // Default templates
+        const templates = {
+            welcome: {
+                subject: "Welcome to Our Platform",
+                content: `<p>Hello {name},</p>
+                <p>Welcome to our platform! We're excited to have you on board.</p>
+                <p>Your account has been successfully created with the email: {email}</p>
+                <p>If you have any questions, feel free to contact our support team.</p>
+                <p>Best regards,<br>The Team</p>`
+            },
+            notification: {
+                subject: "Important Notification",
+                content: `<p>Hello {name},</p>
+                <p>This is an important notification from our system.</p>
+                <p>Please review the information and take any necessary action.</p>
+                <p>If you have any questions, don't hesitate to contact us.</p>
+                <p>Best regards,<br>The Team</p>`
+            },
+            password: {
+                subject: "Password Reset Request",
+                content: `<p>Hello {name},</p>
+                <p>We received a request to reset your password.</p>
+                <p>If you didn't make this request, please ignore this email.</p>
+                <p>Otherwise, click the link below to reset your password:</p>
+                <p><a href="{reset_link}">Reset Password</a></p>
+                <p>Best regards,<br>The Team</p>`
+            },
+            group: {
+                subject: "You've Been Assigned to a Group",
+                content: `<p>Hello {name},</p>
+                <p>You have been assigned to the following group: <strong>{group}</strong></p>
+                <p>This assignment was made on: {date}</p>
+                <p>If you believe this is an error, please contact your administrator.</p>
+                <p>Best regards,<br>The Team</p>`
+            }
+        };
+
+        let currentTemplate = 'welcome';
+        let smtpEnabled = false;
+
+        // Initialize the application
+        function init() {
+            // Load saved settings if available
+            loadSavedSettings();
+            // Set up event listeners
+            setupEventListeners();
+            // Update template preview
+            updateTemplatePreview();
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Template content changes
+            document.getElementById('templateSubject').addEventListener('input', updateTemplatePreview);
+            document.getElementById('templateContent').addEventListener('input', updateTemplatePreview);
+            
+            // Test template selection
+            document.getElementById('testTemplate').addEventListener('change', updateTestPreview);
+        }
+
+        // Load saved settings from localStorage
+        function loadSavedSettings() {
+            const savedSmtp = localStorage.getItem('emailSmtpSettings');
+            if (savedSmtp) {
+                const smtpSettings = JSON.parse(savedSmtp);
+                document.getElementById('enableSmtp').checked = smtpSettings.enabled || false;
+                document.getElementById('smtpHost').value = smtpSettings.host || '';
+                document.getElementById('smtpPort').value = smtpSettings.port || '587';
+                document.getElementById('smtpUsername').value = smtpSettings.username || '';
+                document.getElementById('fromName').value = smtpSettings.fromName || '';
+                document.getElementById('fromEmail').value = smtpSettings.fromEmail || '';
+                document.getElementById('enableTls').checked = smtpSettings.tls !== false;
+                
+                smtpEnabled = smtpSettings.enabled || false;
+                toggleSmtpSettings();
+                
+                if (smtpSettings.enabled) {
+                    updateSmtpStatus('connected');
+                }
+            }
+
+            // Load saved templates
+            const savedTemplates = localStorage.getItem('emailTemplates');
+            if (savedTemplates) {
+                Object.assign(templates, JSON.parse(savedTemplates));
+            }
+        }
+
+        // Switch between tabs
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+            
+            // Add active class to selected tab
+            event.target.classList.add('active');
+            
+            // Update previews when switching to templates or test tabs
+            if (tabName === 'templates') {
+                updateTemplatePreview();
+            } else if (tabName === 'test') {
+                updateTestPreview();
+            }
+        }
+
+        // Toggle SMTP settings visibility
+        function toggleSmtpSettings() {
+            smtpEnabled = document.getElementById('enableSmtp').checked;
+            const smtpSettings = document.getElementById('smtpSettings');
+            
+            if (smtpEnabled) {
+                smtpSettings.style.display = 'block';
+                updateSmtpStatus('disconnected');
+            } else {
+                smtpSettings.style.display = 'none';
+                updateSmtpStatus('disconnected');
+            }
+        }
+
+        // Update SMTP status indicator
+        function updateSmtpStatus(status) {
+            const statusElement = document.getElementById('smtpStatus');
+            statusElement.className = 'status-indicator';
+            
+            switch(status) {
+                case 'connected':
+                    statusElement.classList.add('status-connected');
+                    statusElement.innerHTML = '<span class="status-dot"></span><span>Connected</span>';
+                    break;
+                case 'disconnected':
+                    statusElement.classList.add('status-disconnected');
+                    statusElement.innerHTML = '<span class="status-dot"></span><span>Disconnected</span>';
+                    break;
+                case 'testing':
+                    statusElement.classList.add('status-testing');
+                    statusElement.innerHTML = '<span class="status-dot"></span><span>Testing Connection...</span>';
+                    break;
+            }
+        }
+
+        // Test SMTP connection
+        function testSmtpConnection() {
+            const host = document.getElementById('smtpHost').value;
+            const port = document.getElementById('smtpPort').value;
+            const username = document.getElementById('smtpUsername').value;
+            
+            if (!host || !port || !username) {
+                showAlert('Please fill in all required SMTP settings', 'error');
+                return;
+            }
+            
+            updateSmtpStatus('testing');
+            
+            // Simulate connection test
+            setTimeout(() => {
+                // In a real application, this would make an API call to test the connection
+                const success = Math.random() > 0.3; // 70% success rate for demo
+                
+                if (success) {
+                    updateSmtpStatus('connected');
+                    showAlert('SMTP connection test successful!', 'success');
+                } else {
+                    updateSmtpStatus('disconnected');
+                    showAlert('SMTP connection test failed. Please check your settings.', 'error');
+                }
+            }, 2000);
+        }
+
+        // Save SMTP settings
+        function saveSmtpSettings() {
+            const smtpSettings = {
+                enabled: document.getElementById('enableSmtp').checked,
+                host: document.getElementById('smtpHost').value,
+                port: document.getElementById('smtpPort').value,
+                username: document.getElementById('smtpUsername').value,
+                fromName: document.getElementById('fromName').value,
+                fromEmail: document.getElementById('fromEmail').value,
+                tls: document.getElementById('enableTls').checked
+            };
+            
+            // In a real application, this would save to a server
+            localStorage.setItem('emailSmtpSettings', JSON.stringify(smtpSettings));
+            showAlert('SMTP settings saved successfully!', 'success');
+        }
+
+        // Select email template
+        function selectTemplate(templateId) {
+            currentTemplate = templateId;
+            
+            // Update template list active state
+            document.querySelectorAll('.template-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.closest('.template-item').classList.add('active');
+            
+            // Load template data
+            document.getElementById('templateSubject').value = templates[templateId].subject;
+            document.getElementById('templateContent').value = templates[templateId].content;
+            
+            // Update preview
+            updateTemplatePreview();
+        }
+
+        // Create new template
+        function createNewTemplate() {
+            const templateName = prompt('Enter a name for the new template:');
+            if (templateName) {
+                const templateId = templateName.toLowerCase().replace(/\s+/g, '_');
+                
+                templates[templateId] = {
+                    subject: 'New Template',
+                    content: '<p>Hello {name},</p><p>This is a new email template.</p>'
+                };
+                
+                // Add to template list
+                const templateList = document.querySelector('.template-list');
+                const newTemplate = document.createElement('div');
+                newTemplate.className = 'template-item';
+                newTemplate.onclick = () => selectTemplate(templateId);
+                newTemplate.innerHTML = `
+                    <div class="template-item-header">
+                        <div class="template-item-title">${templateName}</div>
+                        <span>✅</span>
+                    </div>
+                    <div class="template-item-desc">
+                        Custom email template.
+                    </div>
+                `;
+                templateList.appendChild(newTemplate);
+                
+                // Select the new template
+                selectTemplate(templateId);
+                showAlert(`Template "${templateName}" created successfully!`, 'success');
+            }
+        }
+
+        // Update template preview
+        function updateTemplatePreview() {
+            const subject = document.getElementById('templateSubject').value;
+            const content = document.getElementById('templateContent').value;
+            
+            document.getElementById('templatePreview').innerHTML = `
+                <div style="margin-bottom: 15px; font-weight: bold;">Subject: ${subject || 'No subject'}</div>
+                <div>${content || 'No content'}</div>
+            `;
+        }
+
+        // Refresh preview
+        function refreshPreview() {
+            updateTemplatePreview();
+            showAlert('Preview updated', 'success');
+        }
+
+        // Save template
+        function saveTemplate() {
+            const subject = document.getElementById('templateSubject').value;
+            const content = document.getElementById('templateContent').value;
+            
+            if (!subject || !content) {
+                showAlert('Please fill in both subject and content', 'error');
+                return;
+            }
+            
+            templates[currentTemplate] = {
+                subject: subject,
+                content: content
+            };
+            
+            // In a real application, this would save to a server
+            localStorage.setItem('emailTemplates', JSON.stringify(templates));
+            showAlert('Template saved successfully!', 'success');
+        }
+
+        // Reset template to default
+        function resetTemplate() {
+            if (confirm('Are you sure you want to reset this template to its default content?')) {
+                const defaultTemplates = {
+                    welcome: {
+                        subject: "Welcome to Our Platform",
+                        content: `<p>Hello {name},</p>
+                        <p>Welcome to our platform! We're excited to have you on board.</p>
+                        <p>Your account has been successfully created with the email: {email}</p>
+                        <p>If you have any questions, feel free to contact our support team.</p>
+                        <p>Best regards,<br>The Team</p>`
+                    },
+                    notification: {
+                        subject: "Important Notification",
+                        content: `<p>Hello {name},</p>
+                        <p>This is an important notification from our system.</p>
+                        <p>Please review the information and take any necessary action.</p>
+                        <p>If you have any questions, don't hesitate to contact us.</p>
+                        <p>Best regards,<br>The Team</p>`
+                    },
+                    password: {
+                        subject: "Password Reset Request",
+                        content: `<p>Hello {name},</p>
+                        <p>We received a request to reset your password.</p>
+                        <p>If you didn't make this request, please ignore this email.</p>
+                        <p>Otherwise, click the link below to reset your password:</p>
+                        <p><a href="{reset_link}">Reset Password</a></p>
+                        <p>Best regards,<br>The Team</p>`
+                    },
+                    group: {
+                        subject: "You've Been Assigned to a Group",
+                        content: `<p>Hello {name},</p>
+                        <p>You have been assigned to the following group: <strong>{group}</strong></p>
+                        <p>This assignment was made on: {date}</p>
+                        <p>If you believe this is an error, please contact your administrator.</p>
+                        <p>Best regards,<br>The Team</p>`
+                    }
+                };
+                
+                if (defaultTemplates[currentTemplate]) {
+                    document.getElementById('templateSubject').value = defaultTemplates[currentTemplate].subject;
+                    document.getElementById('templateContent').value = defaultTemplates[currentTemplate].content;
+                    updateTemplatePreview();
+                    showAlert('Template reset to default', 'success');
+                }
+            }
+        }
+
+        // Update test email preview
+        function updateTestPreview() {
+            const templateId = document.getElementById('testTemplate').value;
+            const template = templates[templateId];
+            
+            if (template) {
+                // Replace variables with sample data
+                let content = template.content
+                    .replace(/{name}/g, 'John Doe')
+                    .replace(/{email}/g, 'john.doe@example.com')
+                    .replace(/{group}/g, 'Group A')
+                    .replace(/{date}/g, new Date().toLocaleDateString())
+                    .replace(/{reset_link}/g, '#');
+                
+                document.getElementById('testPreview').innerHTML = `
+                    <div style="margin-bottom: 15px; font-weight: bold;">Subject: ${template.subject}</div>
+                    <div>${content}</div>
+                `;
+            }
+        }
+
+        // Send test email
+        function sendTestEmail() {
+            const recipient = document.getElementById('testRecipient').value;
+            const templateId = document.getElementById('testTemplate').value;
+            
+            if (!recipient) {
+                showAlert('Please enter a recipient email address', 'error');
+                return;
+            }
+            
+            if (!validateEmail(recipient)) {
+                showAlert('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            // Show sending status
+            const testStatus = document.getElementById('testStatus');
+            testStatus.style.display = 'flex';
+            
+            // Simulate sending email
+            setTimeout(() => {
+                testStatus.style.display = 'none';
+                showAlert(`Test email sent successfully to ${recipient}!`, 'success');
+            }, 2000);
+        }
+
+        // Clear test form
+        function clearTestForm() {
+            document.getElementById('testRecipient').value = '';
+            document.getElementById('testTemplate').value = 'welcome';
+            updateTestPreview();
+        }
+
+        // Show alert message
+        function showAlert(message, type) {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.textContent = message;
+            alertBox.className = `alert ${type} active`;
+            setTimeout(() => {
+                alertBox.classList.remove('active');
+            }, 4000);
+        }
+
+        // Validate email format
+        function validateEmail(email) {
+            const re = /^[^\s]+[^\s]+\.[^\s]+$/;
+            return re.test(email);
+        }
+
+        // Initialize the application when the page loads
+        window.onload = init;
+    </script>

@@ -1,0 +1,1219 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravEvents | Create Memorable Events</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b;
+            --border: #e2e8f0;
+                } */
+         :root {
+            --primary: #ffc107;
+            --primary-dark: #e6ac00;
+            --primary-light: #fff8e1;
+            --secondary: #ff9800;
+            --dark: #2a2a3c;
+            --light: #fefefe;
+            --gray: #6c757d;
+            --success: #28a745;
+            --admin: #d32f2f;
+            --super-admin: #7b1fa2;
+            --user: #1976d2;
+        } 
+
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: var(--light);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+            .btn:hover {
+                background-color: var(--primary-dark);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+            }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--dark);
+        }
+
+            .btn-secondary:hover {
+                background-color: rgba(255, 193, 7, 0.2);
+            }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+            .nav-links li {
+                margin-left: 30px;
+            }
+
+            .nav-links a {
+                text-decoration: none;
+                color: var(--dark);
+                font-weight: 500;
+                transition: color 0.3s ease;
+            }
+
+                .nav-links a:hover {
+                    color: var(--primary);
+                }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* User Role Badge */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .role-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .role-admin {
+            background-color: var(--admin);
+        }
+
+        .role-super-admin {
+            background-color: var(--super-admin);
+        }
+
+        .role-user {
+            background-color: var(--user);
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 500;
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+            }
+
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+            .form-footer a {
+                color: var(--primary);
+                text-decoration: none;
+                font-weight: 500;
+            }
+
+        /* Event Creation Page */
+        .event-creation-page {
+            display: none;
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            background-color: var(--primary-light);
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .option-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+            .option-card:hover {
+                transform: translateY(-5px);
+                border-color: var(--primary);
+                box-shadow: 0 10px 25px rgba(255, 193, 7, 0.2);
+            }
+
+        .option-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--dark);
+            font-size: 2rem;
+        }
+
+        .option-card h3 {
+            margin-bottom: 15px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+            .back-button:hover {
+                color: var(--primary);
+            }
+
+        /* Event Type Selection */
+        .event-type-selection {
+            display: none;
+            padding: 120px 0 80px;
+            min-height: 100vh;
+            background-color: var(--primary-light);
+        }
+
+        .event-type-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .event-type-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 30px 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+            .event-type-card:hover {
+                transform: translateY(-5px);
+                border-color: var(--primary);
+                box-shadow: 0 10px 25px rgba(255, 193, 7, 0.2);
+            }
+
+        .event-type-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+
+        .event-type-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .coming-soon-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--gray);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #ffc107 0%, #ffcd39 100%);
+            color: var(--dark);
+            padding: 150px 0 100px;
+            text-align: center;
+        }
+
+            .hero h1 {
+                margin-bottom: 20px;
+                font-size: 3.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+                max-width: 700px;
+                margin: 0 auto 30px;
+                color: rgba(42, 42, 60, 0.9);
+            }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .hero .btn {
+            background-color: white;
+            color: var(--dark);
+        }
+
+            .hero .btn:hover {
+                background-color: rgba(255, 255, 255, 0.9);
+            }
+
+        .hero .btn-secondary {
+            background-color: transparent;
+            border-color: white;
+            color: white;
+        }
+
+            .hero .btn-secondary:hover {
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+            .section-header h2 {
+                color: var(--dark);
+            }
+
+            .section-header p {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+            .feature-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 10px 30px rgba(255, 193, 7, 0.2);
+            }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--dark);
+            font-size: 1.8rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background-color: var(--primary-light);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 0 20px;
+            position: relative;
+        }
+
+            .step:not(:last-child):after {
+                content: '';
+                position: absolute;
+                top: 40px;
+                right: 0;
+                width: 50%;
+                height: 2px;
+                background-color: var(--primary);
+                opacity: 0.5;
+            }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background-color: var(--primary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background-color: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .testimonial-card {
+            background-color: var(--light);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-left: 4px solid var(--primary);
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, #ffc107 0%, #ffcd39 100%);
+            color: var(--dark);
+            text-align: center;
+        }
+
+            .cta h2 {
+                margin-bottom: 20px;
+            }
+
+            .cta p {
+                max-width: 700px;
+                margin: 0 auto 30px;
+                color: rgba(42, 42, 60, 0.9);
+            }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            color: white;
+        }
+
+            .footer-column h3:after {
+                content: '';
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                width: 40px;
+                height: 2px;
+                background-color: var(--primary);
+            }
+
+        .footer-links {
+            list-style: none;
+        }
+
+            .footer-links li {
+                margin-bottom: 10px;
+            }
+
+            .footer-links a {
+                color: rgba(255, 255, 255, 0.7);
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+
+                .footer-links a:hover {
+                    color: var(--primary);
+                }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @@media (max-width: 992px) {
+            h1
+
+        {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .step:not(:last-child):after {
+            display: none;
+        }
+
+        .steps {
+            gap: 30px;
+        }
+
+        }
+
+        @@media (max-width: 768px) {
+            .nav-links
+
+        {
+            display: none;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: white;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-links.active {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin: 10px 0;
+        }
+
+        .mobile-menu {
+            display: block;
+        }
+
+        .hero-buttons {
+            flex-direction: column;
+            align-items: center;
+        }
+
+            .hero-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+                margin-bottom: 10px;
+            }
+
+        .feature-card {
+            padding: 20px;
+        }
+
+        .option-card, .event-type-card {
+            padding: 25px 20px;
+        }
+
+        }
+
+        @@media (max-width: 576px) {
+            section
+
+        {
+            padding: 60px 0;
+        }
+
+        h1 {
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        .hero {
+            padding: 120px 0 80px;
+        }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">TravEvents</a>
+                <ul class="nav-links">
+                    <li><a href="#" class="home-link">Home</a></li>
+                    <li><a href="#" class="features-link">Explore Events</a></li>
+                    <li><a href="#" class="how-it-works-link">How It Works</a></li>
+                    <li><a href="#" class="pricing-link">Pricing</a></li>
+                    <li id="user-info-container">
+                        <!-- User info will be inserted here after login -->
+                        <a href="#" class="btn btn-secondary" id="signin-btn">Sign In</a>
+                    </li>
+                </ul>
+                <div class="mobile-menu">☰</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Landing Page -->
+    <div id="landingPage">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Create Unforgettable Events</h1>
+                <p>From intimate gatherings to large conferences, Eventify makes event creation simple, beautiful, and effective.</p>
+                <div class="hero-buttons">
+                    <a href="#" class="btn" id="create-event-btn" >Create Your Event</a>
+                   
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Everything You Need for Perfect Events</h2>
+                    <p>Our platform provides all the tools to create, promote, and manage successful events.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>Easy Event Setup</h3>
+                        <p>Create beautiful event pages in minutes with our intuitive drag-and-drop builder.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-ticket-alt"></i>
+                        </div>
+                        <h3>Smart Ticketing</h3>
+                        <p>Set up multiple ticket types, manage capacity, and track sales in real-time.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <h3>Automated Communications</h3>
+                        <p>Send personalized confirmations, reminders, and follow-ups automatically.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Analytics & Insights</h3>
+                        <p>Track attendance, engagement, and revenue with comprehensive dashboards.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Secure Payments</h3>
+                        <p>Accept payments safely with our PCI-compliant, encrypted payment processing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Mobile Check-In</h3>
+                        <p>Check guests in quickly with our mobile app and QR code scanning.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section class="how-it-works">
+            <div class="container">
+                <div class="section-header">
+                    <h2>How It Works</h2>
+                    <p>Creating your event is as easy as 1-2-3 with our streamlined process.</p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Set Up Your Event</h3>
+                        <p>Add event details, customize your page, and set ticket options.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Promote & Sell</h3>
+                        <p>Share your event page and start selling tickets to attendees.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Manage & Host</h3>
+                        <p>Check in guests, engage attendees, and analyze your success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2>What Our Users Say</h2>
+                    <p>Thousands of event organizers trust Eventify to create memorable experiences.</p>
+                </div>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"Eventify transformed how we organize our annual conference. The ticketing system is flawless and the analytics helped us understand our audience better."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">JS</div>
+                            <div class="author-info">
+                                <h4>Jessica Smith</h4>
+                                <p>Conference Organizer</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"I used to spend days setting up events. With Eventify, I can create a beautiful event page in under an hour. The mobile check-in feature is a game-changer!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MR</div>
+                            <div class="author-info">
+                                <h4>Michael Rodriguez</h4>
+                                <p>Wedding Planner</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The automated communication features saved me so much time. My attendees love the personalized reminders and follow-ups. Highly recommended!"</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AK</div>
+                            <div class="author-info">
+                                <h4>Amanda Kim</h4>
+                                <p>Corporate Event Manager</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Create Your Next Event?</h2>
+                <p>Join thousands of event organizers who trust Eventify to create memorable experiences.</p>
+                <a href="#" class="btn" id="cta-create-event">Get Started For Free</a>
+            </div>
+        </section>
+    </div>
+
+    <!-- Event Creation Page -->
+    <div class="event-creation-page" id="eventCreationPage">
+        <div class="container">
+            <a href="#" class="back-button" id="back-to-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+            <div class="page-title">
+                <h1>What would you like to do?</h1>
+                <p>Choose an option to get started with Trav Events</p>
+            </div>
+            <div class="options-grid">
+                <div class="option-card" id="explore-events" style="display:none;">
+                    <div class="option-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Explore Events</h3>
+                    <p>Browse and discover events happening near you or online</p>
+                </div>
+                <div class="option-card" id="create-events">
+                    <div class="option-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Create Event</h3>
+                    <p>Set up and manage your own event with our easy tools</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Type Selection Page -->
+    <div class="event-type-selection" id="eventTypeSelection">
+        <div class="container">
+            <a href="#" class="back-button" id="back-to-options">
+                <i class="fas fa-arrow-left"></i> Back to Options
+            </a>
+            <div class="page-title">
+                <h1>Select Event Type</h1>
+                <p>Choose the type of event you want to create</p>
+            </div>
+            <div class="event-type-grid">
+                <div class="event-type-card" id="admin-controlled">
+                    <div class="event-type-icon">
+                        <i class="fas fa-user-shield"></i>
+                    </div>
+                    <h3>Admin Controlled Event</h3>
+                    <p>Events managed by administrators with controlled access</p>
+                </div>
+                <div class="event-type-card" id="open-public">
+                    <div class="event-type-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h3>Open Public Event</h3>
+                    <p>Public events open for anyone to join and participate</p>
+                    <div class="coming-soon-badge">Coming Soon</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Event Subtypes -->
+    <div class="event-type-selection" id="adminEventSubtypes">
+        <div class="container">
+            <a href="#" class="back-button" id="back-to-event-types">
+                <i class="fas fa-arrow-left"></i> Back to Event Types
+            </a>
+            <div class="page-title">
+                <h1>Admin Controlled Events</h1>
+                <p>Select the type of admin controlled event</p>
+            </div>
+            <div class="event-type-grid">
+                <div class="event-type-card" id="non-rsvp">
+                    <div class="event-type-icon">
+                        <i class="fas fa-calendar-minus"></i>
+                    </div>
+                    <h3>Non RSVP Event</h3>
+                    <p>Events that don't require attendee confirmation</p>
+                </div>
+                <div class="event-type-card" id="coming-soon">
+                    <div class="event-type-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>RSVP Event - Coming Soon</h3>
+                    <p>Announce events before registration opens</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Eventify</h3>
+                    <p>Creating unforgettable events made simple.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Explore Events</a></li>
+                        @* <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Integrations</a></li>
+                        <li><a href="#">Updates</a></li> *@
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Community</a></li>
+                        <li><a href="#">Events</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Eventify. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOM Elements
+        const landingPage = document.getElementById('landingPage');
+        const eventCreationPage = document.getElementById('eventCreationPage');
+        const eventTypeSelection = document.getElementById('eventTypeSelection');
+        const adminEventSubtypes = document.getElementById('adminEventSubtypes');
+
+        // Navigation buttons
+        const createEventBtn = document.getElementById('create-event-btn');
+        const ctaCreateEvent = document.getElementById('cta-create-event');
+        const backToHome = document.getElementById('back-to-home');
+        const backToOptions = document.getElementById('back-to-options');
+        const backToEventTypes = document.getElementById('back-to-event-types');
+
+        // Option selection
+        const exploreEvents = document.getElementById('explore-events');
+        const createEvents = document.getElementById('create-events');
+
+        // Event type selection
+        const adminControlled = document.getElementById('admin-controlled');
+        const openPublic = document.getElementById('open-public');
+
+        // Admin event subtypes
+        const nonRsvp = document.getElementById('non-rsvp');
+        const comingSoon = document.getElementById('coming-soon');
+
+        // Show event creation page
+        function showEventCreationPage() {
+            landingPage.style.display = 'none';
+            eventCreationPage.style.display = 'block';
+            eventTypeSelection.style.display = 'none';
+            adminEventSubtypes.style.display = 'none';
+        }
+
+        // Show landing page
+        function showLandingPage() {
+            landingPage.style.display = 'block';
+            eventCreationPage.style.display = 'none';
+            eventTypeSelection.style.display = 'none';
+            adminEventSubtypes.style.display = 'none';
+        }
+
+        // Show event type selection
+        function showEventTypeSelection() {
+            landingPage.style.display = 'none';
+            eventCreationPage.style.display = 'none';
+            eventTypeSelection.style.display = 'block';
+            adminEventSubtypes.style.display = 'none';
+        }
+
+        // Show admin event subtypes
+        function showAdminEventSubtypes() {
+            landingPage.style.display = 'none';
+            eventCreationPage.style.display = 'none';
+            eventTypeSelection.style.display = 'none';
+            adminEventSubtypes.style.display = 'block';
+        }
+
+        // Event Listeners
+        createEventBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showEventCreationPage();
+        });
+
+        ctaCreateEvent.addEventListener('click', (e) => {
+            e.preventDefault();
+            showEventCreationPage();
+        });
+
+        backToHome.addEventListener('click', (e) => {
+            e.preventDefault();
+            showLandingPage();
+        });
+
+        backToOptions.addEventListener('click', (e) => {
+            e.preventDefault();
+            showEventCreationPage();
+        });
+
+        backToEventTypes.addEventListener('click', (e) => {
+            e.preventDefault();
+            showEventTypeSelection();
+        });
+
+        exploreEvents.addEventListener('click', () => {
+            alert('Explore Events feature would open here!');
+            // In a real app, this would navigate to the events exploration page
+        });
+
+        createEvents.addEventListener('click', () => {
+            showEventTypeSelection();
+        });
+
+        adminControlled.addEventListener('click', () => {
+            showAdminEventSubtypes();
+        });
+
+        openPublic.addEventListener('click', () => {
+            alert('Open Public Events are coming soon!');
+        });
+
+        nonRsvp.addEventListener('click', () => {
+           // alert('Non RSVP Event creation would start here!');
+            window.location.href ='/Event/Create';
+            // In a real app, this would navigate to the event creation form
+        });
+
+        comingSoon.addEventListener('click', () => {
+            alert('Coming Soon Event creation would start here!');
+            // In a real app, this would navigate to the event creation form
+        });
+
+        // Mobile menu functionality
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>

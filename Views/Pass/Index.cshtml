@@ -1,0 +1,630 @@
+﻿@{
+    Layout = null;
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        /*    --primary: #ffc107 : #ffc107;
+        --primary-dark: #e6ac00;
+        --primary-light: #fff3cd;
+        --secondary: #ff6b35;
+        --dark: #2a2a3c;
+        --light: #fefefe;
+        --gray: #6c757d;
+            --success: #28a745; */
+
+        --primary: #6C63FF;
+        --primary-light: #8A85FF;
+        --primary-dark: #5752CC;
+        --secondary: #FF6584;
+        --accent: #36D1DC;
+        --vip: #FF9A00;
+        --platinum: #E0E0E0;
+        --gold: #FFD700;
+        --silver: #C0C0C0;
+        --light: #f8f9fa;
+        --dark: #2D3748;
+        --gray: #718096;
+        --success: #48BB78;
+        --warning: #ED8936;
+        --radius: 16px;
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --gradient: linear-gradient(135deg, #6C63FF 0%, #36D1DC 100%);
+        --vip-gradient: linear-gradient(135deg, #FF9A00 0%, #FF6A00 100%);
+        --platinum-gradient: linear-gradient(135deg, #E0E0E0 0%, #B8B8B8 100%);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    /* body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: var(--dark);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+    } */
+
+    .container {
+        margin: auto;
+        max-width: 420px;
+        width: 100%;
+    }
+
+    .pass-card {
+        background: white;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 25px;
+    }
+
+        .pass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+    .pass-header {
+        background: var(--gradient);
+        color: white;
+        padding: 25px;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .pass-header.vip {
+            background: var(--vip-gradient);
+        }
+
+        .pass-header.platinum {
+            background: var(--platinum-gradient);
+            color: var(--dark);
+        }
+
+    .header-pattern {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 120px;
+        height: 120px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 0 0 0 100%;
+    }
+
+    .event-title {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 5px;
+        letter-spacing: -0.5px;
+    }
+
+    .event-subtitle {
+        font-size: 16px;
+        opacity: 0.9;
+        font-weight: 500;
+    }
+
+    .pass-type {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.2);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        backdrop-filter: blur(10px);
+    }
+
+    .pass-body {
+        padding: 25px;
+    }
+
+    .attendee-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: var(--gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 28px;
+        font-weight: 700;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+
+    .attendee-info {
+        flex: 1;
+    }
+
+    .attendee-name {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .attendee-company {
+        font-size: 14px;
+        color: var(--gray);
+        margin-bottom: 8px;
+    }
+
+    .group-badge {
+        display: inline-block;
+        background: var(--primary-light);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+        .group-badge.vip {
+            background: var(--vip);
+        }
+
+        .group-badge.platinum {
+            background: var(--platinum);
+            color: var(--dark);
+        }
+
+    .details-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .detail-card {
+        background: var(--light);
+        border-radius: 12px;
+        padding: 15px;
+        text-align: center;
+    }
+
+    .detail-icon {
+        font-size: 20px;
+        margin-bottom: 8px;
+        color: var(--primary);
+    }
+
+    .detail-label {
+        font-size: 12px;
+        color: var(--gray);
+        margin-bottom: 5px;
+        font-weight: 600;
+    }
+
+    .detail-value {
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .access-section {
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+        .section-title i {
+            margin-right: 8px;
+            color: var(--primary);
+        }
+
+    .access-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .access-badge {
+        background: var(--light);
+        border-radius: 20px;
+        padding: 8px 15px;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+    }
+
+        .access-badge i {
+            margin-right: 6px;
+            color: var(--success);
+        }
+
+        .access-badge.restricted i {
+            color: var(--warning);
+        }
+
+    .qr-section {
+        text-align: center;
+        padding: 20px;
+        background: var(--light);
+        border-radius: var(--radius);
+        margin: 25px 0;
+    }
+
+    .qr-container {
+        display: inline-block;
+        padding: 15px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .qr-code {
+        width: 180px;
+        height: 180px;
+    }
+
+    .qr-note {
+        margin-top: 10px;
+        font-size: 13px;
+        color: var(--gray);
+    }
+
+    .pass-footer {
+        padding: 20px 25px;
+        background: var(--light);
+        text-align: center;
+        font-size: 12px;
+        color: var(--gray);
+        border-top: 1px dashed #ddd;
+    }
+
+    .security-features {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 15px;
+        font-size: 11px;
+    }
+
+    .actions {
+        display: flex;
+        gap: 15px;
+    }
+
+    .btn {
+        flex: 1;
+        background: white;
+        color: var(--dark);
+        border: none;
+        padding: 14px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        }
+
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+    }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+    .btn-success {
+        background: var(--success);
+        color: white;
+    }
+
+    .watermark {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        font-size: 10px;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    @@media (max-width: 480px) {
+        .container
+
+    {
+        max-width: 100%;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    }
+
+    /* Animation for pass entrance */
+    @@keyframes fadeInUp {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .pass-card {
+        animation: fadeInUp 0.5s ease-out;
+    }
+</style>
+
+<div class="container">
+    <!-- VIP Pass Example -->
+    <div class="pass-card">
+        <div class="pass-header vip">
+            <div class="header-pattern"></div>
+            <div class="pass-type">VIP</div>
+            <div class="event-title">TECH INNOVATION SUMMIT</div>
+            <div class="event-subtitle">November 15-17, 2023 | San Francisco</div>
+            <div class="watermark">DIGITAL PASS</div>
+        </div>
+        <div class="pass-body">
+            <div class="attendee-section">
+                <div class="avatar">MC</div>
+                <div class="attendee-info">
+                    <div class="attendee-name">Michael Chen</div>
+                    <div class="attendee-company">FutureTech Inc.</div>
+                    <div class="group-badge vip">VIP Group A</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="detail-label">DATE</div>
+                    <div class="detail-value">Nov 15-17</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                    <div class="detail-label">TIME</div>
+                    <div class="detail-value">9:00 AM - 6:00 PM</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="detail-label">VENUE</div>
+                    <div class="detail-value">Moscone Center</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <div class="detail-label">TICKET ID</div>
+                    <div class="detail-value">#TIS23-6105</div>
+                </div>
+            </div>
+
+            <div class="access-section">
+                <div class="section-title">
+                    <i class="fas fa-door-open"></i> ACCESS POINTS
+                </div>
+                <div class="access-points">
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Main Entrance
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> VIP Lounge
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Networking Hall
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Exhibition Area
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Speaker Sessions
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> After Party
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div id="qrcode1" class="qr-code"></div>
+                </div>
+                <div class="qr-note">Scan for entry at access points</div>
+            </div>
+
+            <div class="security-features">
+                <div><i class="fas fa-shield-alt"></i> Secure Digital Pass</div>
+                <div><i class="fas fa-user-check"></i> ID Required</div>
+                <div><i class="fas fa-camera"></i> Photo Enforced</div>
+            </div>
+        </div>
+        <div class="pass-footer">
+            This VIP pass grants access to all areas including exclusive VIP lounge and networking events.
+        </div>
+    </div>
+
+    <!-- Platinum Group Pass Example -->
+    <div class="pass-card">
+        <div class="pass-header platinum">
+            <div class="header-pattern"></div>
+            <div class="pass-type">PLATINUM</div>
+            <div class="event-title">DIGITAL MARKETING CONFERENCE</div>
+            <div class="event-subtitle">December 5-6, 2023 | Chicago</div>
+            <div class="watermark">DIGITAL PASS</div>
+        </div>
+        <div class="pass-body">
+            <div class="attendee-section">
+                <div class="avatar">SR</div>
+                <div class="attendee-info">
+                    <div class="attendee-name">Sarah Rodriguez</div>
+                    <div class="attendee-company">Marketing Pro Group</div>
+                    <div class="group-badge platinum">Platinum Group B</div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="detail-label">DATE</div>
+                    <div class="detail-value">Dec 5-6</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-clock"></i></div>
+                    <div class="detail-label">TIME</div>
+                    <div class="detail-value">8:30 AM - 5:00 PM</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="detail-label">VENUE</div>
+                    <div class="detail-value">Convention Center</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-icon"><i class="fas fa-ticket-alt"></i></div>
+                    <div class="detail-label">TICKET ID</div>
+                    <div class="detail-value">#DMC23-7821</div>
+                </div>
+            </div>
+
+            <div class="access-section">
+                <div class="section-title">
+                    <i class="fas fa-door-open"></i> ACCESS POINTS
+                </div>
+                <div class="access-points">
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Main Entrance
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Platinum Lounge
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Workshop Rooms
+                    </div>
+                    <div class="access-badge">
+                        <i class="fas fa-check-circle"></i> Exhibition Hall
+                    </div>
+                    <div class="access-badge restricted">
+                        <i class="fas fa-times-circle"></i> VIP Networking
+                    </div>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-container">
+                    <div id="qrcode2" class="qr-code"></div>
+                </div>
+                <div class="qr-note">Scan for entry at access points</div>
+            </div>
+
+            <div class="security-features">
+                <div><i class="fas fa-shield-alt"></i> Secure Digital Pass</div>
+                <div><i class="fas fa-user-check"></i> ID Required</div>
+                <div><i class="fas fa-camera"></i> Photo Enforced</div>
+            </div>
+        </div>
+        <div class="pass-footer">
+            Platinum pass includes access to exclusive workshops and platinum lounge area.
+        </div>
+    </div>
+
+    <div class="actions">
+        <button class="btn btn-primary" onclick="saveToWallet()">
+            <i class="fas fa-wallet"></i> Save to Wallet
+        </button>
+        <button class="btn" onclick="printPass()">
+            <i class="fas fa-print"></i> Print Pass
+        </button>
+        <button class="btn btn-success" onclick="sharePass()">
+            <i class="fas fa-share-alt"></i> Share
+        </button>
+    </div>
+</div>
+
+<script>
+    // Generate QR codes
+    document.addEventListener('DOMContentLoaded', function() {
+        // VIP pass QR code
+        new QRCode(document.getElementById("qrcode1"), {
+            text: "TIS23-6105|Michael Chen|VIP Group A|VIP|ACCESS:Main Entrance,VIP Lounge,Networking Hall,Exhibition Area,Speaker Sessions,After Party",
+            width: 180,
+            height: 180,
+            colorDark: "#2D3748",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+
+        // Platinum pass QR code
+        new QRCode(document.getElementById("qrcode2"), {
+            text: "DMC23-7821|Sarah Rodriguez|Platinum Group B|Platinum|ACCESS:Main Entrance,Platinum Lounge,Workshop Rooms,Exhibition Hall",
+            width: 180,
+            height: 180,
+            colorDark: "#2D3748",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H
+        });
+    });
+
+    // Save to wallet function
+    function saveToWallet() {
+        alert("This pass would be added to your digital wallet. In a real application, this would use the Web App Manifest or similar technology.");
+    }
+
+    // Print pass function
+    function printPass() {
+        window.print();
+    }
+
+    // Share pass function
+    function sharePass() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'My Event Pass - Digital Marketing Conference',
+                text: 'Check out my event pass for the Digital Marketing Conference',
+                url: window.location.href,
+            })
+            .then(() => console.log('Successful share'))
+            .catch((error) => console.log('Error sharing', error));
+        } else {
+            alert("Web Share API not supported in your browser. You can copy the URL to share.");
+        }
+    }
+
+    // Add some interactive features
+    document.querySelectorAll('.pass-card').forEach(card => {
+        card.addEventListener('click', function() {
+            this.classList.toggle('expanded');
+        });
+    });
+</script>

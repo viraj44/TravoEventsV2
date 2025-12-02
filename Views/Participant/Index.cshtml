@@ -1,0 +1,1403 @@
+﻿<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    :root {
+        /* --primary:#ffc107 : #ffc107;
+        --primary-dark: #e6ac00;
+        --primary-light: #fff3cd;
+        --secondary: #ff6b35;
+        --dark: #2a2a3c;
+        --light: #fefefe;
+        --gray: #6c757d;
+        --success: #28a745;
+        */
+    
+
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+            --secondary: #10b981;
+                 --light: #f8fafc;
+            --dark: #1e293b;
+            --gray: #64748b
+        --danger: #ef4444;
+        --warning: #f59e0b;
+       
+        --border: #e2e8f0;
+        --locked: #fef2f2;
+        --locked-border: #fecaca;
+    }
+
+    body {
+        background-color: #f1f5f9;
+        color: var(--dark);
+        line-height: 1.6;
+    }
+
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    header {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 20px;
+    }
+
+    .logo-text {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .user-avatar {
+        width: 40px;
+        height: 40px;
+        background: var(--primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 600;
+    }
+
+    .page-header {
+        margin-bottom: 25px;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+        color: var(--dark);
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .page-header p {
+        color: var(--gray);
+        font-size: 16px;
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        border: 1px solid var(--border);
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .action-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .search-box {
+        position: relative;
+        flex-grow: 1;
+        max-width: 400px;
+    }
+
+    .search-box span {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--gray);
+    }
+
+    .search-box input {
+        width: 100%;
+        padding: 12px 15px 12px 45px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        transition: all 0.15s ease;
+    }
+
+    .search-box input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .btn {
+        background: white;
+        color: var(--dark);
+        border: 1px solid var(--border);
+        padding: 10px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 500;
+    }
+
+    .btn:hover {
+        background: #f8fafc;
+        border-color: var(--gray);
+    }
+
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+        border: none;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-dark);
+    }
+
+    .btn-success {
+        background: var(--secondary);
+        color: white;
+        border: none;
+    }
+
+    .btn-success:hover {
+        background: #0da271;
+    }
+
+    .btn-danger {
+        background: white;
+        color: var(--danger);
+        border: 1px solid #fecaca;
+    }
+
+    .btn-danger:hover {
+        background: #fef2f2;
+    }
+
+    .btn-warning {
+        background: var(--warning);
+        color: white;
+        border: none;
+    }
+
+    .btn-warning:hover {
+        background: #d97706;
+    }
+
+    .btn-sm {
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+
+    .table-container {
+        overflow-x: auto;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+
+    thead {
+        background: #f8fafc;
+        border-bottom: 1px solid var(--border);
+    }
+
+    th {
+        padding: 12px 15px;
+        text-align: left;
+        font-weight: 600;
+        color: var(--gray);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    td {
+        padding: 12px 15px;
+        border-bottom: 1px solid var(--border);
+        color: var(--dark);
+    }
+
+    tbody tr {
+        transition: background 0.1s ease;
+    }
+
+    tbody tr:hover {
+        background: #f8fafc;
+    }
+
+    tbody tr.locked {
+        background-color: var(--locked);
+        border-left: 3px solid var(--danger);
+    }
+
+    tbody tr.selected {
+        background-color: #eff6ff;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    .status-badge {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .status-locked {
+        background: #fef2f2;
+        color: var(--danger);
+    }
+
+    .status-unlocked {
+        background: #f0fdf4;
+        color: var(--secondary);
+    }
+
+    .status-pending {
+        background: #fffbeb;
+        color: var(--warning);
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .action-btn {
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .btn-lock {
+        background: #fef2f2;
+        color: var(--danger);
+    }
+
+    .btn-lock:hover {
+        background: #fecaca;
+    }
+
+    .btn-unlock {
+        background: #f0fdf4;
+        color: var(--secondary);
+    }
+
+    .btn-unlock:hover {
+        background: #bbf7d0;
+    }
+
+    .btn-view {
+        background: #eff6ff;
+        color: var(--primary);
+    }
+
+    .btn-view:hover {
+        background: #dbeafe;
+    }
+
+    .btn-email {
+        background: #f8fafc;
+        color: var(--dark);
+    }
+
+    .btn-email:hover {
+        background: #e2e8f0;
+    }
+
+    .btn-whatsapp {
+        background: #f0fdf4;
+        color: #10b981;
+    }
+
+    .btn-whatsapp:hover {
+        background: #bbf7d0;
+    }
+
+    .btn-edit {
+        background: #f8fafc;
+        color: var(--dark);
+    }
+
+    .btn-edit:hover {
+        background: #e2e8f0;
+    }
+
+    .bulk-actions {
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid var(--border);
+        display: none;
+    }
+
+    .bulk-actions.active {
+        display: block;
+    }
+
+    .bulk-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .bulk-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .bulk-options {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .bulk-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 15px;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .bulk-option:hover {
+        border-color: var(--primary);
+        background: #f8fafc;
+    }
+
+    .bulk-option.active {
+        border-color: var(--primary);
+        background: rgba(79, 70, 229, 0.05);
+    }
+
+    .bulk-option-icon {
+        width: 30px;
+        height: 30px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+
+    .bulk-option-lock .bulk-option-icon {
+        background: #fef2f2;
+        color: var(--danger);
+    }
+
+    .bulk-option-unlock .bulk-option-icon {
+        background: #f0fdf4;
+        color: var(--secondary);
+    }
+
+    .bulk-option-email .bulk-option-icon {
+        background: #eff6ff;
+        color: var(--primary);
+    }
+
+    .bulk-option-whatsapp .bulk-option-icon {
+        background: #f0fdf4;
+        color: #10b981;
+    }
+
+    .bulk-option-text {
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .bulk-action-form {
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+        display: none;
+    }
+
+    .bulk-action-form.active {
+        display: block;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        color: var(--dark);
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        color: var(--dark);
+        transition: all 0.15s ease;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(4px);
+        animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @@keyframes slideUp {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 12px;
+        padding: 0;
+        max-width: 800px;
+        width: 90%;
+        position: relative;
+        animation: slideUp 0.3s ease;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .modal-header {
+        padding: 20px 25px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .modal-header h2 {
+        color: var(--dark);
+        font-size: 22px;
+        margin-bottom: 5px;
+        font-weight: 700;
+    }
+
+    .modal-header p {
+        color: var(--gray);
+        font-size: 14px;
+    }
+
+    .close-btn {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        font-size: 24px;
+        color: var(--gray);
+        cursor: pointer;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+        background: transparent;
+    }
+
+    .close-btn:hover {
+        background: #f1f5f9;
+        color: var(--dark);
+    }
+
+    .modal-body {
+        padding: 25px;
+        max-height: 70vh;
+        overflow-y: auto;
+    }
+
+    .pass-container {
+        background: linear-gradient(135deg, #4f46e5, #7c3aed);
+        border-radius: 12px;
+        padding: 30px;
+        color: white;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .pass-header {
+        margin-bottom: 20px;
+    }
+
+    .pass-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+
+    .pass-subtitle {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+    .pass-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+        text-align: left;
+    }
+
+    .pass-detail-item {
+        margin-bottom: 10px;
+    }
+
+    .pass-detail-label {
+        font-size: 12px;
+        opacity: 0.8;
+        margin-bottom: 3px;
+    }
+
+    .pass-detail-value {
+        font-size: 16px;
+        font-weight: 600;
+    }
+
+    .pass-qr {
+        width: 150px;
+        height: 150px;
+        background: white;
+        border-radius: 8px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #333;
+        font-size: 12px;
+    }
+
+    .alert {
+        padding: 15px 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        display: none;
+        animation: slideDown 0.3s ease;
+        border: 1px solid;
+        font-size: 14px;
+    }
+
+    .alert.success {
+        background: #f0fdf4;
+        color: #166534;
+        border-color: #bbf7d0;
+    }
+
+    .alert.error {
+        background: #fef2f2;
+        color: #991b1b;
+        border-color: #fecaca;
+    }
+
+    .alert.warning {
+        background: #fffbeb;
+        color: #92400e;
+        border-color: #fed7aa;
+    }
+
+    .alert.active {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    @@keyframes slideDown {
+        from {
+            transform: translateY(-10px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .notes-box {
+        background: #fffbeb;
+        border: 1px solid #fed7aa;
+        border-radius: 8px;
+        padding: 15px;
+        margin-top: 20px;
+    }
+
+    .notes-title {
+        font-weight: 600;
+        color: #92400e;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .notes-content {
+        color: #92400e;
+        font-size: 14px;
+    }
+
+    .filter-bar {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .filter-select {
+        padding: 10px 15px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 14px;
+        background: white;
+        min-width: 150px;
+    }
+
+    .select-all {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .checkbox {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .checkbox.checked {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+    }
+
+    @@media (max-width: 768px) {
+        .action-bar {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .search-box {
+            max-width: 100%;
+        }
+
+        .action-buttons {
+            flex-direction: column;
+        }
+
+        .pass-details {
+            grid-template-columns: 1fr;
+        }
+
+        .filter-bar {
+            flex-direction: column;
+        }
+
+        .filter-select {
+            width: 100%;
+        }
+
+        .bulk-options {
+            flex-direction: column;
+        }
+    }
+</style>
+ 
+
+    <div class="page-header">
+        <h1>Participant Management</h1>
+        <p>Manage event participants, access control, and communication</p>
+    </div>
+
+    <div id="alertBox" class="alert"></div>
+
+    <!-- Bulk Actions Panel -->
+    <div id="bulkActions" class="bulk-actions">
+        <div class="bulk-header">
+            <div class="bulk-title">Bulk Actions</div>
+            <div class="selected-count" id="selectedCount">0 participants selected</div>
+        </div>
+        <div class="bulk-options">
+            <div class="bulk-option bulk-option-lock" data-action="lock">
+                <div class="bulk-option-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="bulk-option-text">Lock Selected</div>
+            </div>
+            <div class="bulk-option bulk-option-unlock" data-action="unlock">
+                <div class="bulk-option-icon">
+                    <i class="fas fa-unlock"></i>
+                </div>
+                <div class="bulk-option-text">Unlock Selected</div>
+            </div>
+            <div class="bulk-option bulk-option-email" data-action="email">
+                <div class="bulk-option-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="bulk-option-text">Email Selected</div>
+            </div>
+            <div class="bulk-option bulk-option-whatsapp" data-action="whatsapp">
+                <div class="bulk-option-icon">
+                    <i class="fab fa-whatsapp"></i>
+                </div>
+                <div class="bulk-option-text">WhatsApp Selected</div>
+            </div>
+        </div>
+
+        <!-- Bulk Email Form -->
+        <div id="bulkEmailForm" class="bulk-action-form">
+            <div class="form-group">
+                <label class="form-label">Email Subject</label>
+                <input type="text" class="form-input" id="bulkEmailSubject" placeholder="Enter email subject">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Email Message</label>
+                <textarea class="form-textarea" id="bulkEmailMessage" placeholder="Enter your email message"></textarea>
+            </div>
+            <button class="btn btn-primary" onclick="sendBulkEmail()">
+                <i class="fas fa-paper-plane"></i> Send to Selected Participants
+            </button>
+        </div>
+
+        <!-- Bulk WhatsApp Form -->
+        <div id="bulkWhatsAppForm" class="bulk-action-form">
+            <div class="form-group">
+                <label class="form-label">WhatsApp Message</label>
+                <textarea class="form-textarea" id="bulkWhatsAppMessage" placeholder="Enter your WhatsApp message"></textarea>
+            </div>
+            <button class="btn btn-success" onclick="sendBulkWhatsApp()">
+                <i class="fab fa-whatsapp"></i> Send to Selected Participants
+            </button>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="action-bar">
+            <div class="search-box">
+                <span><i class="fas fa-search"></i></span>
+                <input type="text" placeholder="Search participants..." id="searchInput">
+            </div>
+            <div class="filter-bar">
+                <select class="filter-select" id="statusFilter">
+                    <option value="all">All Status</option>
+                    <option value="locked">Locked</option>
+                    <option value="unlocked">Unlocked</option>
+                </select>
+                <select class="filter-select" id="groupFilter">
+                    <option value="all">All Groups</option>
+                    <option value="GroupA">Group A</option>
+                    <option value="GroupB">Group B</option>
+                    <option value="VIP Group">VIP Group</option>
+                </select>
+                <select class="filter-select" id="rsvpFilter">
+                    <option value="all">All RSVP</option>
+                    <option value="yes">RSVP Yes</option>
+                    <option value="no">RSVP No</option>
+                </select>
+            </div>
+            <button class="btn btn-warning" onclick="selectAllParticipants()">
+                <i class="fas fa-check-square"></i> Select All
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table id="participantTable">
+                <thead>
+                    <tr>
+                        <th width="40">
+                            <div class="select-all">
+                                <div class="checkbox" id="selectAllCheckbox"></div>
+                            </div>
+                        </th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile</th>
+                        <th>Group</th>
+                        <th>Access Point</th>
+                        <th>Source</th>
+                        <th>Is RSVP</th>
+                        <th>Paid</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data will be populated by JavaScript -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="notes-box">
+        <div class="notes-title">
+            <i class="fas fa-info-circle"></i> Important Notes
+        </div>
+        <div class="notes-content">
+            <p>Once an event is locked, no further event details/group/participant modifications are allowed.</p>
+            <p>Logs track all modifications to participant data.</p>
+            <p>If any participant is locked, their data cannot be edited.</p>
+        </div>
+    </div>
+</div>
+
+<!-- View Pass Modal -->
+<div id="viewPassModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeViewPassModal()">&times;</span>
+        <div class="modal-header">
+            <h2>Event Pass</h2>
+            <p>Digital access pass for the event</p>
+        </div>
+        <div class="modal-body">
+            <div class="pass-container">
+                <div class="pass-header">
+                    <div class="pass-title">TECH CONFERENCE 2023</div>
+                    <div class="pass-subtitle">October 15-17, 2023 | San Francisco, CA</div>
+                </div>
+                <div class="pass-details">
+                    <div>
+                        <div class="pass-detail-item">
+                            <div class="pass-detail-label">Name</div>
+                            <div class="pass-detail-value" id="passName">Viraj Patel</div>
+                        </div>
+                        <div class="pass-detail-item">
+                            <div class="pass-detail-label">Email</div>
+                            <div class="pass-detail-value" id="passEmail">viraj@example.com</div>
+                        </div>
+                        <div class="pass-detail-item">
+                            <div class="pass-detail-label">Access Level</div>
+                            <div class="pass-detail-value" id="passAccess">VIP</div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="pass-detail-item">
+                            <div class="pass-detail-label">Group</div>
+                            <div class="pass-detail-value" id="passGroup">Group A, VIP Group</div>
+                        </div>
+                        <div class="pass-detail-item">
+                            <div class="pass-detail-label">Access Points</div>
+                            <div class="pass-detail-value" id="passPoints">Access 1, 2, 3, 4</div>
+                        </div>
+                        <div class="pass-detail-item">
+                            <div class="pass-detail-label">Pass ID</div>
+                            <div class="pass-detail-value" id="passId">TC2023-VP-001</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pass-qr">
+                    <div>QR CODE</div>
+                </div>
+                <div class="pass-valid">
+                    Valid for entry until October 17, 2023
+                </div>
+            </div>
+            <div class="action-bar" style="justify-content: center;">
+                <button class="btn btn-primary" onclick="printPass()">
+                    <i class="fas fa-print"></i> Print Pass
+                </button>
+                <button class="btn btn-success" onclick="sendPassEmail()">
+                    <i class="fas fa-envelope"></i> Email Pass
+                </button>
+            </div>
+        </div>
+    </div>
+ 
+
+<script>
+    // Sample participant data
+    let participants = [
+        {
+            id: 1,
+            name: "Viraj Patel",
+            email: "viraj@example.com",
+            mobile: "+1 234 567 8900",
+            group: "GroupA, VIP Group",
+            accessPoint: "Access1,2,3,4",
+            source: "Admin",
+            isRSVP: "Yes",
+            paid: "Free",
+            status: "unlocked",
+            selected: false
+        },
+        {
+            id: 2,
+            name: "Krupal Shah",
+            email: "krupal@example.com",
+            mobile: "+1 234 567 8901",
+            group: "",
+            accessPoint: "",
+            source: "Online",
+            isRSVP: "No",
+            paid: "Free",
+            status: "unlocked",
+            selected: false
+        },
+        {
+            id: 3,
+            name: "Trushant Mehta",
+            email: "trushant@example.com",
+            mobile: "+1 234 567 8902",
+            group: "",
+            accessPoint: "",
+            source: "",
+            isRSVP: "",
+            paid: "Free",
+            status: "locked",
+            selected: false
+        },
+        {
+            id: 4,
+            name: "Priya Sharma",
+            email: "priya@example.com",
+            mobile: "+1 234 567 8903",
+            group: "GroupB",
+            accessPoint: "Access1,2",
+            source: "Online",
+            isRSVP: "Yes",
+            paid: "Paid",
+            status: "unlocked",
+            selected: false
+        },
+        {
+            id: 5,
+            name: "Rahul Kumar",
+            email: "rahul@example.com",
+            mobile: "+1 234 567 8904",
+            group: "VIP Group",
+            accessPoint: "Access1,2,3,4",
+            source: "Admin",
+            isRSVP: "Yes",
+            paid: "Paid",
+            status: "locked",
+            selected: false
+        }
+    ];
+
+    let selectedAction = null;
+
+    // Initialize the table
+    function initializeTable() {
+        const tableBody = document.getElementById('tableBody');
+        tableBody.innerHTML = '';
+
+        participants.forEach(participant => {
+            const tr = document.createElement('tr');
+            if (participant.status === 'locked') {
+                tr.classList.add('locked');
+            }
+            if (participant.selected) {
+                tr.classList.add('selected');
+            }
+
+            tr.innerHTML = `
+                <td>
+                    <div class="checkbox ${participant.selected ? 'checked' : ''}" onclick="toggleParticipantSelection(${participant.id})">
+                        ${participant.selected ? '<i class="fas fa-check"></i>' : ''}
+                    </div>
+                </td>
+                <td>${participant.name}</td>
+                <td>${participant.email}</td>
+                <td>${participant.mobile}</td>
+                <td>${participant.group}</td>
+                <td>${participant.accessPoint}</td>
+                <td>${participant.source}</td>
+                <td>${participant.isRSVP}</td>
+                <td>${participant.paid}</td>
+                <td>
+                    <span class="status-badge ${participant.status === 'locked' ? 'status-locked' : 'status-unlocked'}">
+                        ${participant.status === 'locked' ? 'Locked' : 'Unlocked'}
+                    </span>
+                </td>
+                <td>
+                    <div class="action-buttons">
+                        ${participant.status === 'locked' ?
+                            `<button class="action-btn btn-unlock" onclick="toggleLock(${participant.id})">
+                                <i class="fas fa-unlock"></i> Unlock
+                            </button>` :
+                            `<button class="action-btn btn-lock" onclick="toggleLock(${participant.id})">
+                                <i class="fas fa-lock"></i> Lock
+                            </button>`
+                        }
+                        <button class="action-btn btn-view" onclick="viewPass(${participant.id})">
+                            <i class="fas fa-id-card"></i> View Pass
+                        </button>
+                        <button class="action-btn btn-email" onclick="sendEmail(${participant.id})">
+                            <i class="fas fa-envelope"></i> Email
+                        </button>
+                        <button class="action-btn btn-whatsapp" onclick="sendWhatsApp(${participant.id})">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </button>
+                    </div>
+                </td>
+            `;
+            tableBody.appendChild(tr);
+        });
+
+        updateSelectedCount();
+        updateBulkActionsPanel();
+    }
+
+    // Toggle participant selection
+    function toggleParticipantSelection(id) {
+        const participant = participants.find(p => p.id === id);
+        if (participant) {
+            participant.selected = !participant.selected;
+            initializeTable();
+        }
+    }
+
+    // Select all participants
+    function selectAllParticipants() {
+        const allSelected = participants.every(p => p.selected);
+        participants.forEach(p => {
+            p.selected = !allSelected;
+        });
+        initializeTable();
+    }
+
+    // Update selected count
+    function updateSelectedCount() {
+        const selectedCount = participants.filter(p => p.selected).length;
+        document.getElementById('selectedCount').textContent = `${selectedCount} participants selected`;
+
+        // Update select all checkbox
+        const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+        if (selectedCount === participants.length) {
+            selectAllCheckbox.classList.add('checked');
+            selectAllCheckbox.innerHTML = '<i class="fas fa-check"></i>';
+        } else {
+            selectAllCheckbox.classList.remove('checked');
+            selectAllCheckbox.innerHTML = '';
+        }
+    }
+
+    // Update bulk actions panel visibility
+    function updateBulkActionsPanel() {
+        const selectedCount = participants.filter(p => p.selected).length;
+        const bulkActions = document.getElementById('bulkActions');
+
+        if (selectedCount > 0) {
+            bulkActions.classList.add('active');
+        } else {
+            bulkActions.classList.remove('active');
+            hideAllBulkForms();
+        }
+    }
+
+    // Toggle lock/unlock status for individual participant
+    function toggleLock(id) {
+        const participant = participants.find(p => p.id === id);
+        if (participant) {
+            participant.status = participant.status === 'locked' ? 'unlocked' : 'locked';
+            initializeTable();
+
+            const action = participant.status === 'locked' ? 'locked' : 'unlocked';
+            showAlert(`Participant ${participant.name} has been ${action}`, 'success');
+
+            // Log the action
+            console.log(`Participant ${participant.name} ${action} by Admin User at ${new Date().toLocaleString()}`);
+        }
+    }
+
+    // Bulk lock/unlock
+    function bulkLockUnlock(action) {
+        const selectedParticipants = participants.filter(p => p.selected);
+
+        if (selectedParticipants.length === 0) {
+            showAlert('Please select at least one participant', 'error');
+            return;
+        }
+
+        selectedParticipants.forEach(participant => {
+            participant.status = action;
+        });
+
+        initializeTable();
+        showAlert(`${selectedParticipants.length} participants ${action === 'locked' ? 'locked' : 'unlocked'}`, 'success');
+
+        // Log the action
+        console.log(`${selectedParticipants.length} participants ${action === 'locked' ? 'locked' : 'unlocked'} by Admin User at ${new Date().toLocaleString()}`);
+    }
+
+    // Show bulk email form
+    function showBulkEmailForm() {
+        hideAllBulkForms();
+        document.getElementById('bulkEmailForm').classList.add('active');
+    }
+
+    // Show bulk WhatsApp form
+    function showBulkWhatsAppForm() {
+        hideAllBulkForms();
+        document.getElementById('bulkWhatsAppForm').classList.add('active');
+    }
+
+    // Hide all bulk forms
+    function hideAllBulkForms() {
+        document.getElementById('bulkEmailForm').classList.remove('active');
+        document.getElementById('bulkWhatsAppForm').classList.remove('active');
+    }
+
+    // Send bulk email
+    function sendBulkEmail() {
+        const subject = document.getElementById('bulkEmailSubject').value;
+        const message = document.getElementById('bulkEmailMessage').value;
+        const selectedParticipants = participants.filter(p => p.selected);
+
+        if (selectedParticipants.length === 0) {
+            showAlert('Please select at least one participant', 'error');
+            return;
+        }
+
+        if (!subject || !message) {
+            showAlert('Please enter both subject and message', 'error');
+            return;
+        }
+
+        // Simulate sending email
+        showAlert(`Email sent to ${selectedParticipants.length} participants`, 'success');
+        document.getElementById('bulkEmailSubject').value = '';
+        document.getElementById('bulkEmailMessage').value = '';
+        hideAllBulkForms();
+
+        // Log the action
+        console.log(`Bulk email sent to ${selectedParticipants.length} participants by Admin User at ${new Date().toLocaleString()}`);
+    }
+
+    // Send bulk WhatsApp
+    function sendBulkWhatsApp() {
+        const message = document.getElementById('bulkWhatsAppMessage').value;
+        const selectedParticipants = participants.filter(p => p.selected);
+
+        if (selectedParticipants.length === 0) {
+            showAlert('Please select at least one participant', 'error');
+            return;
+        }
+
+        if (!message) {
+            showAlert('Please enter a message', 'error');
+            return;
+        }
+
+        // Simulate sending WhatsApp
+        showAlert(`WhatsApp message sent to ${selectedParticipants.length} participants`, 'success');
+        document.getElementById('bulkWhatsAppMessage').value = '';
+        hideAllBulkForms();
+
+        // Log the action
+        console.log(`Bulk WhatsApp sent to ${selectedParticipants.length} participants by Admin User at ${new Date().toLocaleString()}`);
+    }
+
+    // View pass modal
+    function viewPass(id) {
+        const participant = participants.find(p => p.id === id);
+        if (participant) {
+            document.getElementById('passName').textContent = participant.name;
+            document.getElementById('passEmail').textContent = participant.email;
+            document.getElementById('passGroup').textContent = participant.group || 'General';
+            document.getElementById('passPoints').textContent = participant.accessPoint || 'All Access Points';
+            document.getElementById('passAccess').textContent = participant.group.includes('VIP') ? 'VIP' : 'Standard';
+            document.getElementById('passId').textContent = `TC2023-${participant.name.substring(0,2).toUpperCase()}-${participant.id.toString().padStart(3, '0')}`;
+
+            document.getElementById('viewPassModal').classList.add('active');
+        }
+    }
+
+    function closeViewPassModal() {
+        document.getElementById('viewPassModal').classList.remove('active');
+    }
+
+    // Alert function
+    function showAlert(message, type) {
+        const alertBox = document.getElementById('alertBox');
+        alertBox.textContent = message;
+        alertBox.className = `alert ${type} active`;
+        setTimeout(() => {
+            alertBox.classList.remove('active');
+        }, 3000);
+    }
+
+    // Communication functions for individual participants
+    function sendEmail(id) {
+        const participant = participants.find(p => p.id === id);
+        if (participant) {
+            showAlert(`Email sent to ${participant.name} (${participant.email})`, 'success');
+        }
+    }
+
+    function sendWhatsApp(id) {
+        const participant = participants.find(p => p.id === id);
+        if (participant) {
+            showAlert(`WhatsApp message sent to ${participant.name}`, 'success');
+        }
+    }
+
+    // Pass functions
+    function printPass() {
+        showAlert('Pass sent to printer', 'success');
+    }
+
+    function sendPassEmail() {
+        showAlert('Pass sent via email', 'success');
+    }
+
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        const searchTerm = e.target.value.toLowerCase();
+        const rows = document.querySelectorAll('#tableBody tr');
+
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
+        });
+    });
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+        initializeTable();
+
+        // Set up bulk action buttons
+        document.querySelectorAll('.bulk-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const action = this.getAttribute('data-action');
+
+                // Remove active class from all options
+                document.querySelectorAll('.bulk-option').forEach(opt => {
+                    opt.classList.remove('active');
+                });
+
+                // Add active class to clicked option
+                this.classList.add('active');
+
+                // Handle different actions
+                if (action === 'lock') {
+                    bulkLockUnlock('locked');
+                } else if (action === 'unlock') {
+                    bulkLockUnlock('unlocked');
+                } else if (action === 'email') {
+                    showBulkEmailForm();
+                } else if (action === 'whatsapp') {
+                    showBulkWhatsAppForm();
+                }
+            });
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', function(event) {
+            const viewPassModal = document.getElementById('viewPassModal');
+
+            if (event.target === viewPassModal) {
+                closeViewPassModal();
+            }
+        });
+    });
+</script>

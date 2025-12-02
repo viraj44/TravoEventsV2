@@ -1,0 +1,1146 @@
+﻿
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
+    <style>
+        :root {
+            --primary: #FFC107;
+            --primary-dark: #FFA000;
+            --secondary: #212121;
+            --light: #FFFFFF;
+            --dark: #212121;
+            --gray: #757575;
+            --light-gray: #F5F5F5;
+            --border: #E0E0E0;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: var(--light-gray);
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: var(--secondary);
+            color: white;
+            padding: 15px;
+            border-radius: 10px 10px 0 0;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+            .header h1 {
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+
+        .scanner-box {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .access-point-selector {
+            margin-bottom: 12px;
+        }
+
+        .selector-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--dark);
+        }
+
+        .access-dropdown {
+            width: 100%;
+            padding: 10px 12px;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: var(--light);
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+            .access-dropdown:focus {
+                outline: none;
+                border-color: var(--primary);
+            }
+
+        .access-option {
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .access-icon {
+            width: 16px;
+            text-align: center;
+        }
+
+        .video-container {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .camera-placeholder {
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+            .camera-placeholder i {
+                font-size: 2rem;
+                margin-bottom: 8px;
+                opacity: 0.7;
+            }
+
+        .scan-frame {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            pointer-events: none;
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .btn {
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--secondary);
+        }
+
+            .btn-primary:hover:not(:disabled) {
+                background: var(--primary-dark);
+            }
+
+        .btn-secondary {
+            background: var(--light-gray);
+            color: var(--dark);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: var(--light-gray);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gray);
+        }
+
+            .status-dot.scanning {
+                background: var(--primary);
+                animation: pulse 1s infinite;
+            }
+
+            .status-dot.success {
+                background: var(--success);
+            }
+
+            .status-dot.warning {
+                background: var(--warning);
+            }
+
+            .status-dot.info {
+                background: var(--info);
+            }
+
+        @@keyframes pulse {
+            0%, 100%
+
+        {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        }
+
+        .results {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .result-card {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--success);
+        }
+
+            .result-card.duplicate {
+                border-left-color: var(--warning);
+                background: #FFF3E0;
+            }
+
+            .result-card.info {
+                border-left-color: var(--info);
+                background: #E3F2FD;
+            }
+
+        .attendee-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .attendee-name {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .attendee-id {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .info-label {
+            color: var(--gray);
+        }
+
+        .info-value {
+            font-weight: 500;
+        }
+
+        .scan-time {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-top: 6px;
+        }
+
+        .access-point {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .duplicate-warning {
+            background: var(--warning);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .duplicate-warning i {
+                font-size: 1rem;
+            }
+
+        .previous-scan {
+            background: var(--info);
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            margin-top: 6px;
+            font-size: 0.8rem;
+        }
+
+        .logs-section {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .logs-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .logs-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            margin-left: 10px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px 8px 32px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+        }
+
+        .logs-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .log-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 10px;
+            border-bottom: 1px solid var(--light-gray);
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+            .log-item:hover {
+                background: var(--light-gray);
+            }
+
+            .log-item:last-child {
+                border-bottom: none;
+            }
+
+        .log-info {
+            flex: 1;
+        }
+
+        .log-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .log-email {
+            font-size: 0.8rem;
+            color: var(--gray);
+            margin-bottom: 4px;
+        }
+
+        .log-details {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.75rem;
+            color: var(--gray);
+        }
+
+        .log-time {
+            text-align: right;
+            min-width: 80px;
+        }
+
+        .log-time-main {
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .log-time-date {
+            font-size: 0.7rem;
+            color: var(--gray);
+        }
+
+        .access-badge {
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .duplicate-badge {
+            background: var(--warning);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 30px 20px;
+            color: var(--gray);
+        }
+
+            .empty-state i {
+                font-size: 2rem;
+                margin-bottom: 8px;
+                opacity: 0.5;
+            }
+
+        .notification {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 12px;
+            background: var(--success);
+            color: white;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transform: translateX(200%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+            .notification.show {
+                transform: translateX(0);
+            }
+
+            .notification.error {
+                background: var(--danger);
+            }
+
+            .notification.warning {
+                background: var(--warning);
+            }
+
+            .notification.info {
+                background: var(--info);
+            }
+
+        #fileInput {
+            display: none;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 6px 10px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            font-size: 0.75rem;
+            background: var(--light);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+            .filter-btn.active {
+                background: var(--primary);
+                color: var(--secondary);
+                border-color: var(--primary);
+            }
+
+        .selected-access-point {
+            background: var(--primary-light);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+ 
+ 
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>QR Scanner</h1>
+        </div>
+
+        <!-- Scanner Section -->
+        <div class="scanner-box">
+            <!-- Access Point Selector -->
+            <div class="access-point-selector">
+                <label class="selector-label">
+                    <i class="fas fa-map-marker-alt"></i> Select Access Point
+                </label>
+                <select class="access-dropdown" id="accessPointDropdown">
+                    <option value="">-- Choose access point --</option>
+                    <option value="Main Entrance">
+                        <div class="access-option">
+                            <span class="access-icon">🚪</span> Main Entrance
+                        </div>
+                    </option>
+                    <option value="Food Counter">
+                        <div class="access-option">
+                            <span class="access-icon">🍽️</span> Food Counter
+                        </div>
+                    </option>
+                    
+                </select>
+            </div>
+
+            <div id="selectedAccessPoint" class="selected-access-point" style="display: none;">
+                <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                <span>Scanning for: <strong id="currentAccessPointText">-</strong></span>
+            </div>
+
+            <div class="video-container">
+                <video id="video" playsinline muted></video>
+                <div id="cameraPlaceholder" class="camera-placeholder">
+                    <i class="fas fa-camera"></i>
+                    <p>Select access point to start</p>
+                </div>
+                <div class="scan-frame"></div>
+            </div>
+
+            <div class="controls">
+                <button class="btn btn-primary" id="startScanner" disabled>
+                    <i class="fas fa-play"></i> Start
+                </button>
+                <button class="btn btn-secondary" id="stopScanner" disabled>
+                    <i class="fas fa-stop"></i> Stop
+                </button>
+                <button class="btn btn-secondary" id="uploadQr" disabled>
+                    <i class="fas fa-upload"></i> Upload
+                </button>
+                <button class="btn btn-secondary" id="testScan" disabled style="display:none;">
+                    <i class="fas fa-bolt"></i> Test
+                </button>
+            </div>
+
+            <div class="status">
+                <div class="status-dot" id="statusDot"></div>
+                <span id="statusText">Select access point to begin</span>
+            </div>
+        </div>
+
+        <!-- Current Scan Result -->
+        <div class="results">
+            <div id="emptyState" class="empty-state">
+                <i class="fas fa-qrcode"></i>
+                <p>No scan yet</p>
+                <p style="font-size: 0.8rem; margin-top: 4px;">Scan a QR code to see details</p>
+            </div>
+
+            <div id="scanResult" style="display: none;">
+                <!-- Result will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- Scan Logs -->
+        <div class="logs-section">
+            <div class="logs-header">
+                <div class="logs-title">Scan Logs</div>
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search scans...">
+                </div>
+            </div>
+
+            <div class="filter-buttons" id="filterButtons">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <!-- Filter buttons will be dynamically generated -->
+            </div>
+
+            <div class="logs-list" id="logsList">
+                <!-- Log items will appear here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="notification" id="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText">Success</span>
+    </div>
+
+    <input type="file" id="fileInput" accept="image/*">
+
+    <script>
+        // Sample attendee data
+        const sampleAttendees = {
+            'A-001': { firstName: 'John', lastName: 'Smith', email: 'john.smith@example.com', company: 'Tech Corp' },
+            'A-002': { firstName: 'Sarah', lastName: 'Johnson', email: 'sarah.j@example.com', company: 'Innovate Ltd' },
+            'A-003': { firstName: 'Michael', lastName: 'Brown', email: 'm.brown@example.com', company: 'Global Solutions' },
+            'A-004': { firstName: 'Emily', lastName: 'Davis', email: 'emily.davis@example.com', company: 'Creative Minds' },
+            'A-005': { firstName: 'David', lastName: 'Wilson', email: 'd.wilson@example.com', company: 'Future Tech' },
+            'A-006': { firstName: 'Lisa', lastName: 'Anderson', email: 'l.anderson@example.com', company: 'Data Systems' }
+        };
+
+        // Access points configuration
+        const accessPoints = {
+            'Main Entrance': { icon: 'fa-door-open', color: '#FFC107', isFood: false },
+            'Food Counter': { icon: 'fa-utensils', color: '#E91E63', isFood: true },
+            'Session Hall A': { icon: 'fa-chalkboard', color: '#4CAF50', isFood: false },
+            'Session Hall B': { icon: 'fa-chalkboard', color: '#4CAF50', isFood: false },
+            'Networking Lounge': { icon: 'fa-users', color: '#9C27B0', isFood: false },
+            'Registration Desk': { icon: 'fa-clipboard-list', color: '#FF9800', isFood: false },
+            'Exhibition Area': { icon: 'fa-store', color: '#795548', isFood: false },
+            'VIP Lounge': { icon: 'fa-crown', color: '#FFD700', isFood: false }
+        };
+
+        // DOM Elements
+        const video = document.getElementById('video');
+        const cameraPlaceholder = document.getElementById('cameraPlaceholder');
+        const accessPointDropdown = document.getElementById('accessPointDropdown');
+        const selectedAccessPoint = document.getElementById('selectedAccessPoint');
+        const currentAccessPointText = document.getElementById('currentAccessPointText');
+        const startScannerBtn = document.getElementById('startScanner');
+        const stopScannerBtn = document.getElementById('stopScanner');
+        const uploadQrBtn = document.getElementById('uploadQr');
+        const testScanBtn = document.getElementById('testScan');
+        const fileInput = document.getElementById('fileInput');
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const emptyState = document.getElementById('emptyState');
+        const scanResult = document.getElementById('scanResult');
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const logsList = document.getElementById('logsList');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.getElementById('filterButtons');
+
+        // App state
+        let stream = null;
+        let scanHistory = JSON.parse(localStorage.getItem('scanHistory')) || [];
+        let isScanning = false;
+        let canvas = document.createElement('canvas');
+        let ctx = canvas.getContext('2d');
+        let currentFilter = 'all';
+        let selectedAccessPointValue = '';
+
+        // Initialize
+        function init() {
+            updateScanLogs();
+            setupEventListeners();
+            updateFilterButtons();
+        }
+
+        function setupEventListeners() {
+            // Access point dropdown change
+            accessPointDropdown.addEventListener('change', function() {
+                selectedAccessPointValue = this.value;
+                if (selectedAccessPointValue) {
+                    selectedAccessPoint.style.display = 'flex';
+                    currentAccessPointText.textContent = selectedAccessPointValue;
+                    startScannerBtn.disabled = false;
+                    uploadQrBtn.disabled = false;
+                    testScanBtn.disabled = false;
+                    updateStatus('ready', `Ready to scan at ${selectedAccessPointValue}`);
+                    cameraPlaceholder.innerHTML = `
+                        <i class="fas fa-camera"></i>
+                        <p>Camera Ready</p>
+                        <p style="font-size: 0.8rem; margin-top: 4px;">Scanning for: ${selectedAccessPointValue}</p>
+                    `;
+                } else {
+                    selectedAccessPoint.style.display = 'none';
+                    startScannerBtn.disabled = true;
+                    uploadQrBtn.disabled = true;
+                    testScanBtn.disabled = true;
+                    updateStatus('info', 'Select access point to begin');
+                    cameraPlaceholder.innerHTML = `
+                        <i class="fas fa-camera"></i>
+                        <p>Select access point to start</p>
+                    `;
+                }
+            });
+
+            startScannerBtn.addEventListener('click', startScanner);
+            stopScannerBtn.addEventListener('click', stopScanner);
+            uploadQrBtn.addEventListener('click', () => fileInput.click());
+            testScanBtn.addEventListener('click', showTestScan);
+            fileInput.addEventListener('change', handleFileUpload);
+            searchInput.addEventListener('input', updateScanLogs);
+
+            // Filter buttons
+            filterButtons.addEventListener('click', (e) => {
+                if (e.target.classList.contains('filter-btn')) {
+                    document.querySelectorAll('.filter-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    e.target.classList.add('active');
+                    currentFilter = e.target.dataset.filter;
+                    updateScanLogs();
+                }
+            });
+
+            video.addEventListener('loadeddata', function() {
+                showCameraPlaceholder(false);
+            });
+        }
+
+        function updateFilterButtons() {
+            // Get unique access points from history
+            const uniqueAccessPoints = [...new Set(scanHistory.map(scan => scan.accessPoint))];
+
+            // Clear existing buttons (except "All")
+            const allBtn = filterButtons.querySelector('[data-filter="all"]');
+            filterButtons.innerHTML = '';
+            filterButtons.appendChild(allBtn);
+
+            // Add buttons for each unique access point
+            uniqueAccessPoints.forEach(point => {
+                if (point) {
+                    const btn = document.createElement('button');
+                    btn.className = 'filter-btn';
+                    btn.dataset.filter = point;
+                    btn.textContent = point;
+                    filterButtons.appendChild(btn);
+                }
+            });
+        }
+
+        function checkDuplicateFoodScan(attendeeId, currentAccessPoint) {
+            if (!accessPoints[currentAccessPoint]?.isFood) {
+                return null; // Not a food counter, no duplicate check needed
+            }
+
+            const previousFoodScans = scanHistory.filter(scan =>
+                scan.id === attendeeId &&
+                accessPoints[scan.accessPoint]?.isFood
+            );
+
+            if (previousFoodScans.length > 0) {
+                return previousFoodScans[0]; // Return the first food scan
+            }
+
+            return null; // No duplicate found
+        }
+
+        async function startScanner() {
+            if (!selectedAccessPointValue) {
+                showNotification('Please select an access point first', 'error');
+                return;
+            }
+
+            try {
+                updateStatus('scanning', `Scanning at ${selectedAccessPointValue}...`);
+
+                const constraints = {
+                    video: { facingMode: "environment" }
+                };
+
+                stream = await navigator.mediaDevices.getUserMedia(constraints);
+                video.srcObject = stream;
+                showCameraPlaceholder(false);
+
+                video.onloadedmetadata = function() {
+                    video.play().then(() => {
+                        startScannerBtn.disabled = true;
+                        stopScannerBtn.disabled = false;
+                        uploadQrBtn.disabled = true;
+                        testScanBtn.disabled = true;
+                        accessPointDropdown.disabled = true;
+                        updateStatus('scanning', `Scanning at ${selectedAccessPointValue}...`);
+                        isScanning = true;
+                        scanFrame();
+                        showNotification(`Scanner started for ${selectedAccessPointValue}`);
+                    });
+                };
+
+            } catch (err) {
+                showNotification('Camera access denied', 'error');
+                updateStatus('error', 'Camera Error');
+            }
+        }
+
+        function stopScanner() {
+            isScanning = false;
+
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+
+            video.srcObject = null;
+            startScannerBtn.disabled = false;
+            stopScannerBtn.disabled = true;
+            uploadQrBtn.disabled = false;
+            testScanBtn.disabled = false;
+            accessPointDropdown.disabled = false;
+            updateStatus('ready', `Ready to scan at ${selectedAccessPointValue}`);
+            showCameraPlaceholder(true);
+        }
+
+        function showCameraPlaceholder(show) {
+            cameraPlaceholder.style.display = show ? 'flex' : 'none';
+            video.style.display = show ? 'none' : 'block';
+        }
+
+        function scanFrame() {
+            if (!isScanning) return;
+
+            if (video.readyState === video.HAVE_ENOUGH_DATA) {
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                if (code) {
+                    handleQRScan(code.data);
+                }
+            }
+
+            requestAnimationFrame(scanFrame);
+        }
+
+        function handleFileUpload(event) {
+            if (!selectedAccessPointValue) {
+                showNotification('Please select an access point first', 'error');
+                return;
+            }
+
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                    const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+                    if (code) {
+                        handleQRScan(code.data);
+                    } else {
+                        showNotification('No QR code found', 'error');
+                    }
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+            event.target.value = '';
+        }
+
+        function handleQRScan(qrData) {
+            try {
+                const data = JSON.parse(qrData);
+                const attendeeId = data.id;
+
+                if (sampleAttendees[attendeeId]) {
+                    const attendee = sampleAttendees[attendeeId];
+                    const now = new Date();
+                    const accessPoint = selectedAccessPointValue;
+
+                    // Check for duplicate food counter scans
+                    const duplicateScan = checkDuplicateFoodScan(attendeeId, accessPoint);
+
+                    displayScanResult(attendee, attendeeId, now, accessPoint, duplicateScan);
+                    addToScanHistory(attendee, attendeeId, now, accessPoint);
+                    stopScanner();
+
+                    if (duplicateScan) {
+                        showNotification(`⚠️ Already collected food at ${duplicateScan.accessPoint} (${duplicateScan.time})`, 'warning');
+                    } else {
+                        showNotification(`Checked in at ${accessPoint}: ${attendee.firstName} ${attendee.lastName}`);
+                    }
+                } else {
+                    showNotification('Invalid QR code', 'error');
+                }
+            } catch (error) {
+                showNotification('Invalid QR code format', 'error');
+            }
+        }
+
+        function displayScanResult(attendee, id, timestamp, accessPoint, duplicateScan) {
+            emptyState.style.display = 'none';
+            scanResult.style.display = 'block';
+
+            const accessPointConfig = accessPoints[accessPoint] || accessPoints['Main Entrance'];
+            const isDuplicateFoodScan = duplicateScan && accessPoints[accessPoint]?.isFood;
+
+            let resultHTML = `
+                <div class="result-card ${isDuplicateFoodScan ? 'duplicate' : ''}">
+                    <div class="attendee-header">
+                        <div class="attendee-name">${attendee.firstName} ${attendee.lastName}</div>
+                        <div class="attendee-id">${id}</div>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Email:</span>
+                        <span class="info-value">${attendee.email}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Company:</span>
+                        <span class="info-value">${attendee.company}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Access Point:</span>
+                        <span class="access-point" style="background: ${accessPointConfig.color}">
+                            <i class="fas ${accessPointConfig.icon}"></i> ${accessPoint}
+                        </span>
+                    </div>
+            `;
+
+            if (isDuplicateFoodScan) {
+                resultHTML += `
+                    <div class="duplicate-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <div>
+                            <strong>Already Collected Food</strong>
+                            <div style="font-size: 0.8rem; margin-top: 2px;">
+                                Previously scanned at ${duplicateScan.accessPoint} (${duplicateScan.time})
+                            </div>
+                        </div>
+                    </div>
+                `;
+                updateStatus('warning', 'Duplicate Food Scan');
+            } else if (accessPoints[accessPoint]?.isFood) {
+                resultHTML += `
+                    <div class="previous-scan">
+                        <i class="fas fa-check-circle"></i>
+                        Food served successfully
+                    </div>
+                `;
+                updateStatus('success', 'Food Served');
+            } else {
+                updateStatus('success', 'Checked In');
+            }
+
+            resultHTML += `
+                    <div class="scan-time">
+                        Scanned at: ${timestamp.toLocaleTimeString('en-IN')}
+                    </div>
+                </div>
+            `;
+
+            scanResult.innerHTML = resultHTML;
+        }
+
+        function addToScanHistory(attendee, id, timestamp, accessPoint) {
+            const scanRecord = {
+                id: id,
+                name: `${attendee.firstName} ${attendee.lastName}`,
+                email: attendee.email,
+                company: attendee.company,
+                accessPoint: accessPoint,
+                timestamp: timestamp.toISOString(),
+                time: timestamp.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }),
+                date: timestamp.toLocaleDateString('en-IN'),
+                isFood: accessPoints[accessPoint]?.isFood || false
+            };
+
+            scanHistory.unshift(scanRecord);
+            if (scanHistory.length > 100) {
+                scanHistory = scanHistory.slice(0, 100);
+            }
+
+            localStorage.setItem('scanHistory', JSON.stringify(scanHistory));
+            updateScanLogs();
+            updateFilterButtons();
+        }
+
+        function updateScanLogs() {
+            const searchTerm = searchInput.value.toLowerCase();
+            let filteredLogs = scanHistory;
+
+            // Apply search filter
+            if (searchTerm) {
+                filteredLogs = scanHistory.filter(log =>
+                    log.name.toLowerCase().includes(searchTerm) ||
+                    log.email.toLowerCase().includes(searchTerm) ||
+                    log.company.toLowerCase().includes(searchTerm) ||
+                    log.id.toLowerCase().includes(searchTerm) ||
+                    log.accessPoint.toLowerCase().includes(searchTerm)
+                );
+            }
+
+            // Apply access point filter
+            if (currentFilter !== 'all') {
+                filteredLogs = filteredLogs.filter(log => log.accessPoint === currentFilter);
+            }
+
+            logsList.innerHTML = '';
+
+            if (filteredLogs.length === 0) {
+                logsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-search"></i>
+                        <p>No scans found</p>
+                        ${searchTerm || currentFilter !== 'all' ?
+                          '<p style="font-size: 0.8rem;">Try different search terms or filters</p>' :
+                          '<p style="font-size: 0.8rem;">Scan QR codes to see logs</p>'}
+                    </div>
+                `;
+                return;
+            }
+
+            filteredLogs.forEach(log => {
+                const accessPointConfig = accessPoints[log.accessPoint] || accessPoints['Main Entrance'];
+                const isFoodDuplicate = log.isFood && scanHistory.filter(s =>
+                    s.id === log.id && s.isFood && s.timestamp < log.timestamp
+                ).length > 0;
+
+                const item = document.createElement('div');
+                item.className = 'log-item';
+                item.innerHTML = `
+                    <div class="log-info">
+                        <div class="log-name">${log.name}</div>
+                        <div class="log-email">${log.email} • ${log.company}</div>
+                        <div class="log-details">
+                            <span class="access-badge" style="background: ${accessPointConfig.color}">
+                                <i class="fas ${accessPointConfig.icon}"></i> ${log.accessPoint}
+                            </span>
+                            ${isFoodDuplicate ? '<span class="duplicate-badge"><i class="fas fa-utensils"></i> Food Collected</span>' : ''}
+                            <span>ID: ${log.id}</span>
+                        </div>
+                    </div>
+                    <div class="log-time">
+                        <div class="log-time-main">${log.time}</div>
+                        <div class="log-time-date">${log.date}</div>
+                    </div>
+                `;
+                item.addEventListener('click', () => {
+                    const attendee = sampleAttendees[log.id];
+                    if (attendee) {
+                        const duplicateScan = log.isFood ? checkDuplicateFoodScan(log.id, log.accessPoint) : null;
+                        displayScanResult(attendee, log.id, new Date(log.timestamp), log.accessPoint, duplicateScan);
+                    }
+                });
+                logsList.appendChild(item);
+            });
+        }
+
+        function showTestScan() {
+            if (!selectedAccessPointValue) {
+                showNotification('Please select an access point first', 'error');
+                return;
+            }
+
+            // Pick a random attendee for testing
+            const ids = Object.keys(sampleAttendees);
+            const randomId = ids[Math.floor(Math.random() * ids.length)];
+            const attendee = sampleAttendees[randomId];
+            const now = new Date();
+            const accessPoint = selectedAccessPointValue;
+
+            // Check for duplicate food counter scans
+            const duplicateScan = checkDuplicateFoodScan(randomId, accessPoint);
+
+            displayScanResult(attendee, randomId, now, accessPoint, duplicateScan);
+            addToScanHistory(attendee, randomId, now, accessPoint);
+
+            if (duplicateScan) {
+                showNotification(`⚠️ Test: Already collected food at ${duplicateScan.accessPoint} (${duplicateScan.time})`, 'warning');
+            } else {
+                showNotification(`Test scan at ${accessPoint}: ${attendee.firstName} ${attendee.lastName}`);
+            }
+        }
+
+        function updateStatus(type, text) {
+            statusDot.className = 'status-dot ' + type;
+            statusText.textContent = text;
+        }
+
+        function showNotification(message, type = 'success') {
+            notificationText.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, type === 'warning' ? 5000 : 3000);
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+ 

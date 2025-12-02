@@ -1,0 +1,1053 @@
+﻿
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #4361ee;
+            --primary-light: #eef2ff;
+            --primary-dark: #3a56d4;
+            --secondary: #06d6a0;
+            /*--primary: #f59e0b;
+                    --primary-light: #fbbf24;
+                    --primary-dark: #d97706;
+                    --secondary: #fef3c7;*/
+            --accent: #fef7cd;
+            --light: #fffbeb;
+            --dark: #78350f;
+            --gray: #92400e;
+            --border: #fcd34d;
+            --success: #10b981;
+            --danger: #ef4444;
+            --shadow: rgba(245, 158, 11, 0.15);
+        }
+
+        body {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+       /*  .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        } */
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dark);
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        @@media (max-width: 900px) {
+            .dashboard
+
+        {
+            grid-template-columns: 1fr;
+        }
+
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--dark);
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* Button Styles */
+        .btn {
+            background: white;
+            color: var(--dark);
+            border: 2px solid var(--primary-light);
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            box-shadow: 0 4px 6px var(--shadow);
+        }
+
+            .btn:hover {
+                background: var(--accent);
+                border-color: var(--primary);
+                transform: translateY(-2px);
+                box-shadow: 0 6px 12px var(--shadow);
+            }
+
+       /*  .btn-primary {
+            background: var(--primary);
+            color: var(--dark);
+            border: 2px solid var(--primary);
+        }
+
+            .btn-primary:hover {
+                background: var(--primary-dark);
+                border-color: var(--primary-dark);
+                color: white;
+            }
+ */
+        .btn-success {
+            background: var(--success);
+            color: white;
+            border: 2px solid var(--success);
+        }
+
+        .btn-sm {
+            padding: 8px 14px;
+            font-size: 14px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            font-size: 15px;
+            color: var(--dark);
+            transition: all 0.2s ease;
+            background: white;
+        }
+
+            .form-input:focus, .form-select:focus, .form-textarea:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px var(--shadow);
+            }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        thead {
+            background: var(--secondary);
+        }
+
+        th {
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 14px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 15px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--dark);
+        }
+
+        tbody tr:hover {
+            background: var(--accent);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-inactive {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Access Points Styles */
+        .access-points-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .access-point-card {
+            background: var(--light);
+            border: 2px solid var(--secondary);
+            border-radius: 10px;
+            padding: 15px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+            .access-point-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px var(--shadow);
+            }
+
+            .access-point-card.selected {
+                border-color: var(--primary);
+                background: var(--accent);
+            btn
+
+    /*  .access-point-icon {
+             width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            margin-bottom: 10px;
+        }
+ */
+        .access-point-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .access-point-location {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            animation: fadeIn 0.3s ease;
+        }
+
+            .modal.active {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        @@keyframes slideUp {
+            from
+
+        {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: var(--dark);
+            padding: 20px 25px;
+            border-bottom: 1px solid var(--border);
+        }
+
+            .modal-header h2 {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 5px;
+            }
+
+        .close-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            color: var(--dark);
+            cursor: pointer;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            transition: all 0.15s ease;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+            .close-btn:hover {
+                background: rgba(255, 255, 255, 0.5);
+            }
+
+        .modal-body {
+            padding: 25px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            padding: 20px 25px;
+            border-top: 1px solid var(--border);
+            background: var(--light);
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--gray);
+            transition: all 0.2s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+            .tab.active {
+                color: var(--primary-dark);
+                border-bottom: 3px solid var(--primary);
+            }
+
+        .tab-content {
+            display: none;
+        }
+
+            .tab-content.active {
+                display: block;
+            }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: var(--gray);
+            font-weight: 600;
+        }
+    </style>
+
+  
+    <div class="">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-users-cog"></i>
+                </div>
+                <div class="logo-text">Access Control Manager</div>
+            </div>
+            <div class="btn btn-primary" onclick="openAccessPointModal()">
+                <i class="fas fa-plus"></i> Create Access Point
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard">
+            <!-- Groups Panel -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-layer-group"></i> Group Management</h2>
+                    <button class="btn btn-primary" onclick="openGroupModal()">
+                        <i class="fas fa-plus"></i> Create Group
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalGroups">0</div>
+                            <div class="stat-label">Total Groups</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="activeGroups">0</div>
+                            <div class="stat-label">Active Groups</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalAccessPoints">0</div>
+                            <div class="stat-label">Access Points</div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table id="groupsTable">
+                            <thead>
+                                <tr>
+                                    <th>Group Name</th>
+                                    <th>Access Points</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="groupsTableBody">
+                                <!-- Groups will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Access Points Panel -->
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title"><i class="fas fa-door-open"></i> Access Points</h2>
+                    <button class="btn btn-primary" onclick="openAccessPointModal()">
+                        <i class="fas fa-plus"></i> Add Access Point
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="tabs">
+                        <div class="tab active" data-tab="all">All Points</div>
+                        <div class="tab" data-tab="assigned">Assigned</div>
+                        <div class="tab" data-tab="unassigned">Unassigned</div>
+                    </div>
+
+                    <div class="tab-content active" id="tab-all">
+                        <div class="access-points-grid" id="allAccessPoints">
+                            <!-- Access points will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-assigned">
+                        <div class="access-points-grid" id="assignedAccessPoints">
+                            <!-- Assigned access points will be populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="tab-unassigned">
+                        <div class="access-points-grid" id="unassignedAccessPoints">
+                            <!-- Unassigned access points will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Group Modal -->
+    <div id="groupModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeGroupModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="groupModalTitle">Create New Group</h2>
+                <p>Define a new group and assign access permissions</p>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Group Name</label>
+                    <input type="text" class="form-input" id="groupName" placeholder="Enter group name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Description</label>
+                    <textarea class="form-textarea" id="groupDescription" placeholder="Describe the purpose of this group"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Assign Access Points</label>
+                    <div class="access-points-grid" id="modalAccessPoints">
+                        <!-- Access points for selection will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn" onclick="closeGroupModal()">Cancel</button>
+                <button class="btn btn-primary" id="groupModalAction" onclick="saveGroup()">Create Group</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Access Point Modal -->
+    <div id="accessPointModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeAccessPointModal()">&times;</span>
+            <div class="modal-header">
+                <h2 id="accessPointModalTitle">Create Access Point</h2>
+            <p>Define a new physical or virtual access logo-icon</p>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Access Point Name</label>
+                    <input type="text" class="form-input" id="accessPointName" placeholder="Enter access point name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Location</label>
+                    <input type="text"  class="form-input" id="accessPointLocation" placeholder="Enter physical location or description">
+                </div>
+
+                <div class="form-group" style="display:none;">
+                    <label class="form-label">Type</label>
+                    <select class="form-select" id="accessPointType">
+                        <option value="entrance" selected>Entrance</option>
+                        <option value="exit">Exit</option>
+                        <option value="restricted">Restricted Area</option>
+                        <option value="virtual">Virtual Access</option>
+                    </select>
+                </div>
+
+            <div class="form-group" style="display:none;">
+                    <label class="form-label">Status</label>
+                    <select class="form-select" id="accessPointStatus">
+                        <option value="active" selected>Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="maintenance">Under Maintenance</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn" onclick="closeAccessPointModal()">Cancel</button>
+                <button class="btn btn-primary" id="accessPointModalAction" onclick="saveAccessPoint()">Create Access Point</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let groups = JSON.parse(localStorage.getItem('groups')) || [];
+        let accessPoints = JSON.parse(localStorage.getItem('accessPoints')) || [];
+        let selectedAccessPoints = [];
+        let editingGroupId = null;
+        let editingAccessPointId = null;
+
+        // Initialize the page
+        function initializePage() {
+            renderGroupsTable();
+            renderAccessPoints();
+            setupTabs();
+            updateStats();
+
+            // Add some sample data if empty
+            if (accessPoints.length === 0) {
+                initializeSampleData();
+            }
+        }
+
+        // Initialize sample data
+        function initializeSampleData() {
+            const sampleAccessPoints = [
+                { id: 1, name: "Main Entrance", location: "Building A, Front", type: "entrance", status: "active" },
+                { id: 2, name: "VIP Lounge", location: "Building B, Level 2", type: "restricted", status: "active" },
+                { id: 3, name: "Backstage Area", location: "Event Hall, Rear", type: "restricted", status: "active" },
+                { id: 4, name: "Parking Garage", location: "Underground Level", type: "entrance", status: "active" },
+                { id: 5, name: "Online Portal", location: "Virtual Access", type: "virtual", status: "active" }
+            ];
+
+            const sampleGroups = [
+                { id: 1, name: "Administrators", description: "Full system access", accessPoints: [1, 2, 3, 4, 5], status: "active" },
+                { id: 2, name: "Event Staff", description: "Event management team", accessPoints: [1, 2, 3], status: "active" },
+                { id: 3, name: "VIP Guests", description: "Special access for VIPs", accessPoints: [1, 2, 4], status: "active" }
+            ];
+
+            accessPoints = sampleAccessPoints;
+            groups = sampleGroups;
+
+            saveToLocalStorage();
+            renderGroupsTable();
+            renderAccessPoints();
+            updateStats();
+        }
+
+        // Save data to localStorage
+        function saveToLocalStorage() {
+            localStorage.setItem('groups', JSON.stringify(groups));
+            localStorage.setItem('accessPoints', JSON.stringify(accessPoints));
+        }
+
+        // Render groups table
+        function renderGroupsTable() {
+            const tbody = document.getElementById('groupsTableBody');
+            tbody.innerHTML = '';
+
+            groups.forEach(group => {
+                const accessPointNames = accessPoints
+                    .filter(ap => group.accessPoints.includes(ap.id))
+                    .map(ap => ap.name)
+                    .join(', ');
+
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>
+                        <div style="font-weight: 700;">${group.name}</div>
+                        <div style="font-size: 12px; color: var(--gray);">${group.description}</div>
+                    </td>
+                    <td>${accessPointNames || 'None'}</td>
+                    <td>
+                        <span class="status-badge ${group.status === 'active' ? 'status-active' : 'status-inactive'}">
+                            ${group.status === 'active' ? 'Active' : 'Inactive'}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="action-buttons">
+                            <button class="btn btn-sm" onclick="editGroup(${group.id})">
+                                <i class="fas fa-edit"></i> Edit
+                            </button>
+                            <button class="btn btn-sm btn-primary" onclick="manageAccessPoints(${group.id})">
+                                <i class="fas fa-door-open"></i> Manage Access
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Render access points
+        function renderAccessPoints() {
+            renderAccessPointsByTab('all', document.getElementById('allAccessPoints'));
+            renderAccessPointsByTab('assigned', document.getElementById('assignedAccessPoints'));
+            renderAccessPointsByTab('unassigned', document.getElementById('unassignedAccessPoints'));
+        }
+
+        // Render access points for a specific tab
+        function renderAccessPointsByTab(tab, container) {
+            container.innerHTML = '';
+
+            let filteredPoints = [];
+
+            if (tab === 'all') {
+                filteredPoints = accessPoints;
+            } else if (tab === 'assigned') {
+                // Get all access point IDs that are assigned to any group
+                const assignedPointIds = new Set();
+                groups.forEach(group => {
+                    group.accessPoints.forEach(apId => assignedPointIds.add(apId));
+                });
+                filteredPoints = accessPoints.filter(ap => assignedPointIds.has(ap.id));
+            } else if (tab === 'unassigned') {
+                // Get all access point IDs that are assigned to any group
+                const assignedPointIds = new Set();
+                groups.forEach(group => {
+                    group.accessPoints.forEach(apId => assignedPointIds.add(apId));
+                });
+                filteredPoints = accessPoints.filter(ap => !assignedPointIds.has(ap.id));
+            }
+
+            filteredPoints.forEach(point => {
+                const card = document.createElement('div');
+                card.className = 'access-point-card';
+                card.setAttribute('data-id', point.id);
+
+                // Determine icon based on type
+                let icon = 'fa-door-open';
+                if (point.type === 'virtual') icon = 'fa-globe';
+                if (point.type === 'restricted') icon = 'fa-lock';
+                if (point.type === 'exit') icon = 'fa-sign-out-alt';
+
+                card.innerHTML = `
+                    <div class="access-point-icon">
+                        <i class="fas ${icon}"></i>
+                    </div>
+                    <div class="access-point-name">${point.name}</div>
+                    <div class="access-point-location">${point.location}</div>
+                    <div style="margin-top: 10px;">
+                        <span class="status-badge ${point.status === 'active' ? 'status-active' : 'status-inactive'}">
+                            ${point.status === 'active' ? 'Active' : 'Inactive'}
+                        </span>
+                        <span style="font-size: 11px; color: var(--gray); margin-left: 8px;">
+                            ${point.type}
+                        </span>
+                    </div>
+                `;
+
+                card.addEventListener('click', () => {
+                    if (tab === 'all') {
+                        editAccessPoint(point.id);
+                    }
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        // Render access points for modal selection
+        function renderModalAccessPoints() {
+            const container = document.getElementById('modalAccessPoints');
+            container.innerHTML = '';
+
+            accessPoints.forEach(point => {
+                const card = document.createElement('div');
+                card.className = `access-point-card ${selectedAccessPoints.includes(point.id) ? 'selected' : ''}`;
+                card.setAttribute('data-id', point.id);
+
+                // Determine icon based on type
+                let icon = 'fa-door-open';
+                if (point.type === 'virtual') icon = 'fa-globe';
+                if (point.type === 'restricted') icon = 'fa-lock';
+                if (point.type === 'exit') icon = 'fa-sign-out-alt';
+
+                card.innerHTML = `
+                    <div class="access-point-icon">
+                        <i class="fas ${icon}"></i>
+                    </div>
+                    <div class="access-point-name">${point.name}</div>
+                    <div class="access-point-location">${point.location}</div>
+                `;
+
+                card.addEventListener('click', () => {
+                    card.classList.toggle('selected');
+                    const pointId = point.id;
+
+                    if (card.classList.contains('selected')) {
+                        if (!selectedAccessPoints.includes(pointId)) {
+                            selectedAccessPoints.push(pointId);
+                        }
+                    } else {
+                        selectedAccessPoints = selectedAccessPoints.filter(id => id !== pointId);
+                    }
+                });
+
+                container.appendChild(card);
+            });
+        }
+
+        // Setup tabs
+        function setupTabs() {
+            const tabs = document.querySelectorAll('.tab');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs and contents
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Show corresponding content
+                    const tabId = tab.getAttribute('data-tab');
+                    document.getElementById(`tab-${tabId}`).classList.add('active');
+
+                    // Re-render access points for this tab
+                    renderAccessPoints();
+                });
+            });
+        }
+
+        // Update statistics
+        function updateStats() {
+            document.getElementById('totalGroups').textContent = groups.length;
+            document.getElementById('activeGroups').textContent = groups.filter(g => g.status === 'active').length;
+            document.getElementById('totalAccessPoints').textContent = accessPoints.length;
+        }
+
+        // Open group modal
+        function openGroupModal() {
+            editingGroupId = null;
+            selectedAccessPoints = [];
+            document.getElementById('groupModal').classList.add('active');
+            document.getElementById('groupModalTitle').textContent = 'Create New Group';
+            document.getElementById('groupModalAction').textContent = 'Create Group';
+            document.getElementById('groupName').value = '';
+            document.getElementById('groupDescription').value = '';
+
+            renderModalAccessPoints();
+        }
+
+        // Close group modal
+        function closeGroupModal() {
+            document.getElementById('groupModal').classList.remove('active');
+        }
+
+        // Open access point modal
+        function openAccessPointModal() {
+            editingAccessPointId = null;
+            document.getElementById('accessPointModal').classList.add('active');
+            document.getElementById('accessPointModalTitle').textContent = 'Create Access Point';
+            document.getElementById('accessPointModalAction').textContent = 'Create Access Point';
+            document.getElementById('accessPointName').value = '';
+            document.getElementById('accessPointLocation').value = '';
+            document.getElementById('accessPointType').value = 'entrance';
+            document.getElementById('accessPointStatus').value = 'active';
+        }
+
+        // Close access point modal
+        function closeAccessPointModal() {
+            document.getElementById('accessPointModal').classList.remove('active');
+        }
+
+        // Save group
+        function saveGroup() {
+            const name = document.getElementById('groupName').value.trim();
+            const description = document.getElementById('groupDescription').value.trim();
+
+            if (!name) {
+                alert('Please enter a group name');
+                return;
+            }
+
+            if (editingGroupId) {
+                // Update existing group
+                const groupIndex = groups.findIndex(g => g.id === editingGroupId);
+                if (groupIndex !== -1) {
+                    groups[groupIndex].name = name;
+                    groups[groupIndex].description = description;
+                    groups[groupIndex].accessPoints = [...selectedAccessPoints];
+                }
+            } else {
+                // Create new group
+                const newGroup = {
+                    id: groups.length > 0 ? Math.max(...groups.map(g => g.id)) + 1 : 1,
+                    name: name,
+                    description: description,
+                    accessPoints: [...selectedAccessPoints],
+                    status: 'active'
+                };
+
+                groups.push(newGroup);
+            }
+
+            saveToLocalStorage();
+            renderGroupsTable();
+            updateStats();
+            closeGroupModal();
+
+            alert(editingGroupId ? 'Group updated successfully!' : 'Group created successfully!');
+        }
+
+        // Save access point
+        function saveAccessPoint() {
+            const name = document.getElementById('accessPointName').value.trim();
+            const location = document.getElementById('accessPointLocation').value.trim();
+            const type = document.getElementById('accessPointType').value;
+            const status = document.getElementById('accessPointStatus').value;
+
+            if (!name || !location) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            if (editingAccessPointId) {
+                // Update existing access point
+                const pointIndex = accessPoints.findIndex(ap => ap.id === editingAccessPointId);
+                if (pointIndex !== -1) {
+                    accessPoints[pointIndex].name = name;
+                    accessPoints[pointIndex].location = location;
+                    accessPoints[pointIndex].type = type;
+                    accessPoints[pointIndex].status = status;
+                }
+            } else {
+                // Create new access point
+                const newAccessPoint = {
+                    id: accessPoints.length > 0 ? Math.max(...accessPoints.map(ap => ap.id)) + 1 : 1,
+                    name: name,
+                    location: location,
+                    type: type,
+                    status: status
+                };
+
+                accessPoints.push(newAccessPoint);
+            }
+
+            saveToLocalStorage();
+            renderAccessPoints();
+            closeAccessPointModal();
+
+            alert(editingAccessPointId ? 'Access point updated successfully!' : 'Access point created successfully!');
+        }
+
+        // Edit group
+        function editGroup(id) {
+            const group = groups.find(g => g.id === id);
+            if (group) {
+                editingGroupId = id;
+                selectedAccessPoints = [...group.accessPoints];
+
+                document.getElementById('groupModal').classList.add('active');
+                document.getElementById('groupModalTitle').textContent = 'Edit Group';
+                document.getElementById('groupModalAction').textContent = 'Update Group';
+                document.getElementById('groupName').value = group.name;
+                document.getElementById('groupDescription').value = group.description;
+
+                renderModalAccessPoints();
+            }
+        }
+
+        // Edit access point
+        function editAccessPoint(id) {
+            const point = accessPoints.find(ap => ap.id === id);
+            if (point) {
+                editingAccessPointId = id;
+
+                document.getElementById('accessPointModal').classList.add('active');
+                document.getElementById('accessPointModalTitle').textContent = 'Edit Access Point';
+                document.getElementById('accessPointModalAction').textContent = 'Update Access Point';
+                document.getElementById('accessPointName').value = point.name;
+                document.getElementById('accessPointLocation').value = point.location;
+                document.getElementById('accessPointType').value = point.type;
+                document.getElementById('accessPointStatus').value = point.status;
+            }
+        }
+
+        // Manage access points for a group
+        function manageAccessPoints(groupId) {
+            const group = groups.find(g => g.id === groupId);
+            if (group) {
+                editingGroupId = groupId;
+                selectedAccessPoints = [...group.accessPoints];
+
+                document.getElementById('groupModal').classList.add('active');
+                document.getElementById('groupModalTitle').textContent = `Manage Access Points - ${group.name}`;
+                document.getElementById('groupModalAction').textContent = 'Update Access Points';
+                document.getElementById('groupName').value = group.name;
+                document.getElementById('groupDescription').value = group.description;
+
+                // Disable name and description fields when managing access points
+                document.getElementById('groupName').disabled = true;
+                document.getElementById('groupDescription').disabled = true;
+
+                renderModalAccessPoints();
+            }
+        }
+
+        // Initialize the page when loaded
+        document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
